@@ -23,14 +23,14 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/imageView"
+                android:id="@+id/poster"
                 android:padding="10sp"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/icon"
-                android:id="@+id/imageview_disabled"/>
+                android:id="@+id/alternate"/>
 
         </FrameLayout>
 
