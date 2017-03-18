@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-
+                int statusCode = response.code();
             }
 
             @Override
