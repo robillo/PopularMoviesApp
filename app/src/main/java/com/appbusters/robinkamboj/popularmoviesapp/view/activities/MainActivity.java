@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -35,8 +36,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     boolean doubleBackToExitPressedOnce = false;
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,23 +45,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
-        call.enqueue(new Callback<MoviesResponse>() {
-            @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                int statusCode = response.code();
-                List<Movie> movies = response.body().getResults();
-
-            }
-
-            @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Log.e(TAG, t.toString());
-            }
-        });
 
         //Set The Fragment Initially
         AllMoviesFragment allMoviesFragment = new AllMoviesFragment();
