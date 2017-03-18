@@ -12,13 +12,12 @@ public class MovieViewHolder extends RecyclerView.ViewHolder{
 
     LinearLayout moviesLayout;
     TextView movieTitle;
-    ImageView poster, alternate;
+    ImageView poster;
 
     public MovieViewHolder(View itemView) {
         super(itemView);
         moviesLayout = (LinearLayout) itemView.findViewById(R.id.movies_layout);
         movieTitle = (TextView) itemView.findViewById(R.id.title);
         poster = (ImageView) itemView.findViewById(R.id.poster);
-        alternate = (ImageView) itemView.findViewById(R.id.alternate);
     }
 }

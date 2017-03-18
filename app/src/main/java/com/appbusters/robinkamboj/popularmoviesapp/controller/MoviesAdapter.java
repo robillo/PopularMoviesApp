@@ -2,10 +2,12 @@ package com.appbusters.robinkamboj.popularmoviesapp.controller;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -32,12 +34,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
+        String path = movies.get(position).getPoster_path();
         holder.movieTitle.setText(movies.get(position).getTitle());
-        Glide.with(context).load(movies.get(position).getPoster_path())
+        Glide.with(context).load("http://image.tmdb.org/t/p/w185" + path)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
                 .centerCrop()
+                .placeholder(R.drawable.icon)
                 .into(holder.poster);
+        Log.e("POSTER PATH: ", path);
     }
 
     @Override

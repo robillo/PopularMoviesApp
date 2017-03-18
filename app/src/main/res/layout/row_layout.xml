@@ -2,37 +2,23 @@
 <android.support.v7.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="4sp"
-    android:id="@+id/cardView"
-    android:clickable="false">
+    android:id="@+id/cardView">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/movies_layout"
-        android:background="@drawable/card_background">
+        android:background="@drawable/card_background"
+        android:clickable="true">
 
-        <FrameLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="160sp"
-            android:id="@+id/frameLayout">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/poster"
-                android:padding="10sp"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon"
-                android:id="@+id/alternate"/>
-
-        </FrameLayout>
+            android:id="@+id/poster"
+            android:padding="5sp"/>
 
         <TextView
             android:id="@+id/title"
@@ -41,7 +27,8 @@
             android:gravity="center"
             android:padding="4sp"
             android:text="LIGHT"
-            android:textColor="@color/colorBlackShade" />
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/colorBlackShade"/>
 
     </LinearLayout>
 
