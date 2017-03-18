@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.MoviesAdapter;
@@ -37,7 +38,7 @@ public class AllMoviesFragment extends Fragment {
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
     private RecyclerView recyclerView;
     private MoviesAdapter adapter;
-    private ImageView alternate_layout;
+    private LinearLayout alternate_layout;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -49,7 +50,7 @@ public class AllMoviesFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_all_movies, container, false);
 
-        alternate_layout = (ImageView) v.findViewById(R.id.alternate_layout);
+        alternate_layout = (LinearLayout) v.findViewById(R.id.alternate_layout);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
