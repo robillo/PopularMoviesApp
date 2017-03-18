@@ -17,13 +17,25 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
+import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
+import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
+import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
+import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 import com.appbusters.robinkamboj.popularmoviesapp.view.fragments.AllMoviesFragment;
 import com.appbusters.robinkamboj.popularmoviesapp.view.fragments.YourFavouritesFragment;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     boolean doubleBackToExitPressedOnce = false;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +45,21 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
+        call.enqueue(new Callback<MoviesResponse>() {
+            @Override
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+            }
+        });
 
         //Set The Fragment Initially
         AllMoviesFragment allMoviesFragment = new AllMoviesFragment();
