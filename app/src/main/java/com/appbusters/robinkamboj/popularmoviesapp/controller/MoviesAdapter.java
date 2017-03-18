@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -31,6 +33,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         holder.movieTitle.setText(movies.get(position).getTitle());
+        Glide.with(context).load(movies.get(position).getPoster_path())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .centerCrop()
+                .into(holder.poster);
     }
 
     @Override
