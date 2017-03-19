@@ -15,8 +15,8 @@
         android:clickable="true">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="160sp"
+            android:layout_width="184sp"
+            android:layout_height="278sp"
             android:layout_margin="1sp"
             android:id="@+id/poster"/>
 
