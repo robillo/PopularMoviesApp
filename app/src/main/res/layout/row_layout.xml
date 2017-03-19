@@ -8,27 +8,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:id="@+id/movies_layout"
+        android:orientation="vertical"
         android:background="@drawable/card_background"
         android:clickable="true">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="160sp"
-            android:id="@+id/poster"
-            android:padding="5sp"/>
+            android:id="@+id/poster"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="bottom"
             android:padding="4sp"
             android:text="LIGHT"
+            android:textStyle="bold"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorBlackShade"/>
+            android:textColor="@color/colorWhiteShade"/>
 
     </LinearLayout>
 
