@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,14 +15,14 @@ import com.appbusters.robinkamboj.popularmoviesapp.view.activities.DetailActivit
 
 public class MovieViewHolder extends RecyclerView.ViewHolder{
 
-    public LinearLayout moviesLayout;
+    public RelativeLayout moviesLayout;
     public TextView movieTitle;
     public ImageView poster;
     private Context context;
 
     public MovieViewHolder(View itemView) {
         super(itemView);
-        moviesLayout = (LinearLayout) itemView.findViewById(R.id.movies_layout);
+        moviesLayout = (RelativeLayout) itemView.findViewById(R.id.movies_layout);
         movieTitle = (TextView) itemView.findViewById(R.id.title);
         poster = (ImageView) itemView.findViewById(R.id.poster);
         context = itemView.getContext();

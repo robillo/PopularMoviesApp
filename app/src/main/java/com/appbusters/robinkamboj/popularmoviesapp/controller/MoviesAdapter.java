@@ -40,7 +40,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
                 .fitCenter()
-                .placeholder(R.drawable.icon)
+                .placeholder(R.drawable.placeholder)
                 .into(holder.poster);
         Log.e("POSTER PATH: ", path);
     }
