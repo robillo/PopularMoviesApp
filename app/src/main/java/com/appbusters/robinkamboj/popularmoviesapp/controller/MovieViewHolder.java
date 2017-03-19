@@ -35,16 +35,15 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void DetailIntent(Movie movie){
         Intent i = new Intent(context, DetailActivity.class);
         i.putExtra("title", movie.getTitle());
-        i.putExtra("", movie.getPoster_path());
-        i.putExtra("", movie.isAdult());
-        i.putExtra("", movie.getBackdrop_path());
-        i.putExtra("", movie.getOriginal_language());
-        i.putExtra("", movie.getPopularity());
-        i.putExtra("", movie.getRelease_date());
-        i.putExtra("", movie.getVote_count());
-        i.putExtra("", movie.getVote_average());
-        i.putExtra("", movie.isVideo());
-        Log.e("MOVIE NAME: ", movie.getTitle());
+        i.putExtra("poster_path", movie.getPoster_path());
+        i.putExtra("is_adult", movie.isAdult());
+        i.putExtra("backdrop_path", movie.getBackdrop_path());
+        i.putExtra("original_language", movie.getOriginal_language());
+        i.putExtra("popularity", movie.getPopularity());
+        i.putExtra("release_date", movie.getRelease_date());
+        i.putExtra("vote_count", movie.getVote_count());
+        i.putExtra("vote_average", movie.getVote_average());
+        i.putExtra("is_video", movie.isVideo());
         context.startActivity(i);
     }
 
