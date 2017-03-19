@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:layout_width="wrap_content"
+<android.support.v7.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -7,7 +7,7 @@
     android:id="@+id/cardView">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/movies_layout"
         android:background="@drawable/card_background"
@@ -16,8 +16,10 @@
         <ImageView
             android:layout_width="185sp"
             android:layout_height="278sp"
+            android:id="@+id/poster"
             android:layout_margin="1sp"
-            android:id="@+id/poster"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/title"
