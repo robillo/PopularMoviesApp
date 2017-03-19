@@ -10,12 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/movies_layout"
-        android:background="@drawable/card_background"
-        android:clickable="true">
+        android:background="@drawable/card_background">
 
         <ImageView
             android:layout_width="185sp"
-            android:layout_height="278sp"
+            android:layout_height="270sp"
             android:id="@+id/poster"
             android:layout_margin="1sp"
             android:layout_alignParentTop="true"

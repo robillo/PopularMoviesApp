@@ -33,7 +33,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(final MovieViewHolder holder, int position) {
         String path = movies.get(position).getPoster_path();
         holder.movieTitle.setText(movies.get(position).getTitle());
         Glide.with(context).load("http://image.tmdb.org/t/p/w185" + path)
@@ -43,6 +43,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
                 .placeholder(R.drawable.placeholder)
                 .into(holder.poster);
         Log.e("POSTER PATH: ", path);
+
+        holder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View v, int position, boolean isLongClick) {
+                if(isLongClick){
+                    holder.DetailIntent(movies.get(position));
+                    Log.e("MOVIE NAME: ", movies.get(position).getTitle());
+                }
+                else {
+                    holder.DetailIntent(movies.get(position));
+                    Log.e("MOVIE NAME: ", movies.get(position).getTitle());
+                }
+            }
+        });
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.appbusters.robinkamboj.popularmoviesapp.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,11 +14,12 @@ import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
 import com.appbusters.robinkamboj.popularmoviesapp.view.activities.DetailActivity;
 
-public class MovieViewHolder extends RecyclerView.ViewHolder{
+public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
     public RelativeLayout moviesLayout;
     public TextView movieTitle;
     public ImageView poster;
+    private ItemClickListener clickListener;
     private Context context;
 
     public MovieViewHolder(View itemView) {
@@ -40,6 +42,22 @@ public class MovieViewHolder extends RecyclerView.ViewHolder{
         i.putExtra("", movie.getVote_count());
         i.putExtra("", movie.getVote_average());
         i.putExtra("", movie.isVideo());
+        Log.e("MOVIE NAME: ", movie.getTitle());
         context.startActivity(i);
+    }
+
+    public void setClickListener(ItemClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        clickListener.onClick(itemView, getAdapterPosition(), false);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        clickListener.onClick(itemView, getAdapterPosition(), true);
+        return false;
     }
 }
