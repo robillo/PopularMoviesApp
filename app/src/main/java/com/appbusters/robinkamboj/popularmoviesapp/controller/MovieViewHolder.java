@@ -28,6 +28,9 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
         movieTitle = (TextView) itemView.findViewById(R.id.title);
         poster = (ImageView) itemView.findViewById(R.id.poster);
         context = itemView.getContext();
+
+        itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
     }
 
     public void DetailIntent(Movie movie){
