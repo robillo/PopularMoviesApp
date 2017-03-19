@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         Log.e("DETAILS", title + "\n" + poster_path + "\n" + backdrop_path + "\n" + vote_average + "\n" + is_adult + "\n" + is_video
                 + "\n" + vote_count + "\n" + release_date + "\n" + popularity + "\n" + original_language);
 
-        ViewTarget view_target = new ViewTarget(appBarLayout);
+        ViewTarget view_target = new ViewTarget(toolbar_layout);
 
         Glide.with(this).load("http://image.tmdb.org/t/p/w185" + backdrop_path)
                 .centerCrop()
