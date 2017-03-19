@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_margin="4sp"
+    android:layout_margin="2sp"
     android:id="@+id/cardView">
 
     <LinearLayout
@@ -17,12 +17,13 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="160sp"
+            android:layout_margin="1sp"
             android:id="@+id/poster"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_gravity="bottom"
             android:padding="4sp"
