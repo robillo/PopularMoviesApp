@@ -92,9 +92,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5sp"
+                    android:padding="3sp"
                     android:text="Overview:"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:id="@+id/one"
                     android:fontFamily="sans-serif-smallcaps"/>
 
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5sp"
                     android:text="Overview Of The Movie Goes Here"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textColor="@color/colorBlackShade"
                     android:layout_below="@+id/one"
                     android:fontFamily="casual"
