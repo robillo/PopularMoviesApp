@@ -106,7 +106,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/colorBlackShade"
                     android:layout_below="@+id/one"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="casual"
                     android:id="@+id/overview"/>
 
             </RelativeLayout>

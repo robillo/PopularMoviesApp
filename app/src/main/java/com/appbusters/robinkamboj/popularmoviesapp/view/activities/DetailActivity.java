@@ -24,7 +24,7 @@ public class DetailActivity extends AppCompatActivity {
     private CollapsingToolbarLayout toolbar_layout;
 
     private ImageView poster;
-    private TextView movie_title, movie_rating, movie_release_date;
+    private TextView movie_title, movie_rating, movie_release_date, movie_overview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         movie_title = (TextView) findViewById(R.id.title);
         movie_rating = (TextView) findViewById(R.id.rating);
         movie_release_date = (TextView) findViewById(R.id.release_date);
+        movie_overview = (TextView) findViewById(R.id.overview);
         toolbar_layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
         Intent i = getIntent();
@@ -59,6 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         movie_title.setText(title);
         movie_rating.setText(vote_average);
         movie_release_date.setText(release_date);
+        movie_overview.setText(overview);
 
         Glide.with(this).load("http://image.tmdb.org/t/p/w185" + poster_path)
                 .centerCrop()
