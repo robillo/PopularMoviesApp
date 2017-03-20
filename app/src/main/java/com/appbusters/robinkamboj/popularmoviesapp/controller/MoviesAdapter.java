@@ -48,13 +48,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
             @Override
             public void onClick(View v, int position, boolean isLongClick) {
                 if(isLongClick){
-                    holder.DetailIntent();
+                    holder.DetailIntent(movies.get(position).getTitle(), movies.get(position).getPoster_path(), String.valueOf(movies.get(position).isAdult()), movies.get(position).getBackdrop_path(), movies.get(position).getOriginal_language(), String.valueOf(movies.get(position).getPopularity()), movies.get(position).getRelease_date(), String.valueOf(movies.get(position).getVote_count()), String.valueOf(movies.get(position).getVote_average()), String.valueOf(movies.get(position).isVideo()));
                     Log.e("MOVIE NAME: ", movies.get(position).getTitle());
                 }
                 else {
                     Log.e("VOTE AVERAGE", String.valueOf(movies.get(position).getVote_average()));
                     Log.e("VOTE COUNT", String.valueOf(movies.get(position).getVote_count()));
-                    holder.DetailIntent();
+                    holder.DetailIntent(movies.get(position).getTitle(), movies.get(position).getPoster_path(), String.valueOf(movies.get(position).isAdult()), movies.get(position).getBackdrop_path(), movies.get(position).getOriginal_language(), String.valueOf(movies.get(position).getPopularity()), movies.get(position).getRelease_date(), String.valueOf(movies.get(position).getVote_count()), String.valueOf(movies.get(position).getVote_average()), String.valueOf(movies.get(position).isVideo()));
                 }
             }
         });
