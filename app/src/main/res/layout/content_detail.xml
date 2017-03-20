@@ -113,6 +113,60 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4sp"
+            android:layout_margin="5sp"
+            app:cardCornerRadius="5sp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3sp"
+                    android:text="Videos:"
+                    android:textSize="18sp"
+                    android:id="@+id/two"
+                    android:fontFamily="sans-serif-smallcaps"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/two">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <SurfaceView
+                            android:layout_width="200sp"
+                            android:layout_height="100sp" />
+
+                        <SurfaceView
+                            android:layout_width="200sp"
+                            android:layout_height="100sp" />
+
+                        <SurfaceView
+                            android:layout_width="200sp"
+                            android:layout_height="100sp" />
+
+                        <SurfaceView
+                            android:layout_width="200sp"
+                            android:layout_height="100sp" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
