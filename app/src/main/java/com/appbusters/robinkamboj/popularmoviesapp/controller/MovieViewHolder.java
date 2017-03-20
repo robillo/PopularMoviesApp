@@ -32,18 +32,18 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
         itemView.setOnLongClickListener(this);
     }
 
-    public void DetailIntent(Movie movie){
+    public void DetailIntent(String title, String poster_path, String is_adult, String backdrop_path, String original_language, String popularity, String release_date, String vote_count, String vote_average, String is_video){
         Intent i = new Intent(context, DetailActivity.class);
-        i.putExtra("title", movie.getTitle());
-        i.putExtra("poster_path", movie.getPoster_path());
-        i.putExtra("is_adult", movie.isAdult());
-        i.putExtra("backdrop_path", movie.getBackdrop_path());
-        i.putExtra("original_language", movie.getOriginal_language());
-        i.putExtra("popularity", movie.getPopularity());
-        i.putExtra("release_date", movie.getRelease_date());
-        i.putExtra("vote_count", movie.getVote_count());
-        i.putExtra("vote_average", movie.getVote_average());
-        i.putExtra("is_video", movie.isVideo());
+        i.putExtra("title", title);
+        i.putExtra("poster_path", poster_path);
+        i.putExtra("is_adult", is_adult);
+        i.putExtra("backdrop_path", backdrop_path);
+        i.putExtra("original_language", original_language);
+        i.putExtra("popularity", popularity);
+        i.putExtra("release_date", release_date);
+        i.putExtra("vote_count", vote_count);
+        i.putExtra("vote_average", vote_average);
+        i.putExtra("is_video", is_video);
         context.startActivity(i);
     }
 

@@ -48,13 +48,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
             @Override
             public void onClick(View v, int position, boolean isLongClick) {
                 if(isLongClick){
-                    holder.DetailIntent(movies.get(position));
+                    holder.DetailIntent();
                     Log.e("MOVIE NAME: ", movies.get(position).getTitle());
                 }
                 else {
                     Log.e("VOTE AVERAGE", String.valueOf(movies.get(position).getVote_average()));
                     Log.e("VOTE COUNT", String.valueOf(movies.get(position).getVote_count()));
-                    holder.DetailIntent(movies.get(position));
+                    holder.DetailIntent();
                 }
             }
         });
