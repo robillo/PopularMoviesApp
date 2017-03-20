@@ -20,10 +20,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language;
+    private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview;
     private CollapsingToolbarLayout toolbar_layout;
-    private AppBarLayout appBarLayout;
-    private Toolbar toolbar;
 
     private ImageView poster;
     private TextView movie_title, movie_rating, movie_release_date;
@@ -42,8 +40,6 @@ public class DetailActivity extends AppCompatActivity {
         movie_rating = (TextView) findViewById(R.id.rating);
         movie_release_date = (TextView) findViewById(R.id.release_date);
         toolbar_layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Intent i = getIntent();
         title = i.getStringExtra("title");
@@ -56,6 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         release_date = i.getStringExtra("release_date");
         popularity = i.getStringExtra("popularity");
         original_language = i.getStringExtra("original_language");
+        overview = i.getStringExtra("overview");
 
         getSupportActionBar().setTitle(title);
 
