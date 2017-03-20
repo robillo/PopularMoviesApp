@@ -145,19 +145,23 @@
 
                         <SurfaceView
                             android:layout_width="200sp"
-                            android:layout_height="100sp" />
+                            android:layout_height="100sp"
+                            android:layout_margin="4sp"/>
 
                         <SurfaceView
                             android:layout_width="200sp"
-                            android:layout_height="100sp" />
+                            android:layout_height="100sp"
+                            android:layout_margin="4sp"/>
 
                         <SurfaceView
                             android:layout_width="200sp"
-                            android:layout_height="100sp" />
+                            android:layout_height="100sp"
+                            android:layout_margin="4sp"/>
 
                         <SurfaceView
                             android:layout_width="200sp"
-                            android:layout_height="100sp" />
+                            android:layout_height="100sp"
+                            android:layout_margin="4sp"/>
 
                     </LinearLayout>
 
