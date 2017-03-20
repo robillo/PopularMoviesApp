@@ -36,19 +36,19 @@
                 android:fontFamily="sans-serif-smallcaps"
                 android:textColor="@color/colorBlackShade"
                 android:textSize="22sp"
-                android:gravity="center"
-                android:layout_margin="4sp"
+                android:gravity="start"
+                android:layout_marginTop="14sp"
                 android:id="@+id/title"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4sp"
+                android:padding="10sp"
                 android:text="8.0"
                 android:fontFamily="sans-serif-smallcaps"
                 android:textColor="@color/colorPrimary"
                 android:textSize="28sp"
-                android:gravity="center"
+                android:gravity="start"
                 android:id="@+id/rating"
                 android:layout_marginLeft="4sp"
                 android:layout_marginRight="4sp"
@@ -65,7 +65,7 @@
                 android:text="Release Date:"
                 android:fontFamily="sans-serif-smallcaps"
                 android:textSize="18sp"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_margin="4sp"
                 android:id="@+id/release_date"/>
 
