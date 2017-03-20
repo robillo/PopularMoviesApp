@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ViewTarget;
@@ -22,6 +24,9 @@ public class DetailActivity extends AppCompatActivity {
     private CollapsingToolbarLayout toolbar_layout;
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
+
+    private ImageView poster;
+    private TextView movie_title, movie_rating, movie_release_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

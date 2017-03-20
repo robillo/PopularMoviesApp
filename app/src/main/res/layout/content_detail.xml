@@ -15,7 +15,6 @@
         app:cardElevation="4sp"
         app:cardCornerRadius="5sp">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
