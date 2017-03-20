@@ -52,8 +52,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
                     Log.e("MOVIE NAME: ", movies.get(position).getTitle());
                 }
                 else {
+                    Log.e("VOTE AVERAGE", String.valueOf(movies.get(position).getVote_average()));
+                    Log.e("VOTE COUNT", String.valueOf(movies.get(position).getVote_count()));
                     holder.DetailIntent(movies.get(position));
-                    Log.e("MOVIE NAME: ", movies.get(position).getTitle());
                 }
             }
         });

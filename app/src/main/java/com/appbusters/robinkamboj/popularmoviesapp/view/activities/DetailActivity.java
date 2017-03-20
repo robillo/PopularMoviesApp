@@ -37,6 +37,10 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        poster = (ImageView) findViewById(R.id.poster);
+        movie_title = (TextView) findViewById(R.id.title);
+        movie_rating = (TextView) findViewById(R.id.rating);
+        movie_release_date = (TextView) findViewById(R.id.release_date);
         toolbar_layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,6 +58,16 @@ public class DetailActivity extends AppCompatActivity {
         original_language = i.getStringExtra("original_language");
 
         getSupportActionBar().setTitle(title);
+
+        movie_title.setText(title);
+        movie_rating.setText(vote_average);
+        movie_release_date.setText(release_date);
+
+        Glide.with(this).load("http://image.tmdb.org/t/p/w185" + poster_path)
+                .centerCrop()
+                .placeholder(R.drawable.placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(poster);
 
         Log.e("DETAILS", title + "\n" + poster_path + "\n" + backdrop_path + "\n" + vote_average + "\n" + is_adult + "\n" + is_video
                 + "\n" + vote_count + "\n" + release_date + "\n" + popularity + "\n" + original_language);
