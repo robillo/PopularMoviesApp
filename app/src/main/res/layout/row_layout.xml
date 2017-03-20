@@ -31,7 +31,7 @@
             android:layout_below="@+id/poster"
             android:textStyle="bold"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorBlackShade"/>
+            android:textColor="@color/colorWhiteShade"/>
 
     </RelativeLayout>
 

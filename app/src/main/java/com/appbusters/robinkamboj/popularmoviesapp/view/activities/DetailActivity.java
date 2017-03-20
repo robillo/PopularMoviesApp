@@ -30,6 +30,8 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar_layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -45,6 +47,8 @@ public class DetailActivity extends AppCompatActivity {
         release_date = i.getStringExtra("release_date");
         popularity = i.getStringExtra("popularity");
         original_language = i.getStringExtra("original_language");
+
+        getSupportActionBar().setTitle(title);
 
         Log.e("DETAILS", title + "\n" + poster_path + "\n" + backdrop_path + "\n" + vote_average + "\n" + is_adult + "\n" + is_video
                 + "\n" + vote_count + "\n" + release_date + "\n" + popularity + "\n" + original_language);
