@@ -45,6 +45,7 @@ public class AllMoviesFragment extends Fragment {
     private RecyclerView recyclerView;
     private MoviesAdapter adapter;
     private LinearLayout alternate_layout;
+    private ApiInterface apiService;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -63,7 +64,7 @@ public class AllMoviesFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
         call.enqueue(new Callback<MoviesResponse>() {
             @Override

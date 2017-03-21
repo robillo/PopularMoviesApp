@@ -12,6 +12,12 @@ public interface ApiInterface {
     @GET("movie/top_rated")
     Call<MoviesResponse> getTopRatedMovies(@Query("api_key") String apiKey);
 
+    @GET("movie/most_rated")
+    Call<MoviesResponse> getMostRatedMovies(@Query("api_key") String apiKey);
+
+    @GET("movie/most_popular")
+    Call<MoviesResponse> getMostPopularMovies(@Query("api_key") String apiKey);
+
     @GET("movie/{id}")
     Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
 
