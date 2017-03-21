@@ -1,68 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appbusters.robinkamboj.popularmoviesapp.view.activities.MainActivity">
+    android:layout_marginTop="?android:attr/actionBarSize"
+    tools:context="com.appbusters.robinkamboj.popularmoviesapp.view.fragments.AllMoviesFragment">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/app_bar_elevation"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/alternate_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
+            android:textSize="15sp"
             android:fontFamily="sans-serif-condensed"
-            android:text="@string/app_name"/>
+            android:text="No Movies To Display"
+            android:textColor="#FF0000"
+            android:layout_margin="4sp"/>
 
-    </android.support.v7.widget.Toolbar>
+    </LinearLayout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        tools:context="com.appbusters.robinkamboj.popularmoviesapp.view.fragments.AllMoviesFragment">
+        android:id="@+id/recyclerview"
+        android:visibility="invisible">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:id="@+id/alternate_layout">
+    </android.support.v7.widget.RecyclerView>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_launcher"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="No Movies To Display"
-                android:textColor="#FF0000"
-                android:layout_margin="4sp"/>
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerview"
-            android:visibility="invisible">
-
-        </android.support.v7.widget.RecyclerView>
-
-    </FrameLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</FrameLayout>

@@ -19,6 +19,7 @@
             android:layout_width="185sp"
             android:layout_height="270sp"
             android:id="@+id/poster"
+            android:src="@drawable/placeholder"
             android:layout_margin="1sp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
