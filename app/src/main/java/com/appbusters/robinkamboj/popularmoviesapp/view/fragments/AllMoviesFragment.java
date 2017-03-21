@@ -1,9 +1,11 @@
 package com.appbusters.robinkamboj.popularmoviesapp.view.fragments;
 
 
+import android.content.DialogInterface;
 import android.media.ImageReader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +41,7 @@ public class AllMoviesFragment extends Fragment {
 
     private static final String TAG = AllMoviesFragment.class.getSimpleName();
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
+    private CharSequence items[] = {"Highest Rated", "Most Popular", "Most Rated"};
     private RecyclerView recyclerView;
     private MoviesAdapter adapter;
     private LinearLayout alternate_layout;
@@ -98,9 +101,28 @@ public class AllMoviesFragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_search:{
+
+                break;
+            }
+            case R.id.action_sort:{
+                Log.e("CHECK CLICK", "CLICKED! YO!");
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Choose Sorting Option:")
+                        .setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                builder.show();
+                break;
+            }
+            case R.id.action_settings:{
+
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);
