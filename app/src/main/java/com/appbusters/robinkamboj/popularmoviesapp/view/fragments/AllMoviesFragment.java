@@ -112,8 +112,21 @@ public class AllMoviesFragment extends Fragment {
                 builder.setTitle("Choose Sorting Option:")
                         .setItems(items, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                switch (which){
+                                    case 0:{
+                                        Log.e("which?", "Highest Rated");
+                                        break;
+                                    }
+                                    case 1:{
+                                        Log.e("which?", "Most Popular");
+                                        break;
+                                    }
+                                    case 2:{
+                                        Log.e("which?", "Most Rated");
+                                        break;
+                                    }
+                                }
                             }
                         });
                 builder.show();
