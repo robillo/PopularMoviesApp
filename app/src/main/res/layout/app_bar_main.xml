@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.appbusters.robinkamboj.popularmoviesapp.view.activities.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/app_bar_elevation"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:elevation="@dimen/app_bar_elevation"-->
+        <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/app_name"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:fontFamily="sans-serif-condensed"-->
+            <!--android:text="@string/app_name"/>-->
 
-    </android.support.v7.widget.Toolbar>
+    <!--</android.support.v7.widget.Toolbar>-->
 
     <FrameLayout
         android:layout_width="match_parent"

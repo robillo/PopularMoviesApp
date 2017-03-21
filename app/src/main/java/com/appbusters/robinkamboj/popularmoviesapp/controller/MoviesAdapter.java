@@ -39,7 +39,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
         Glide.with(context).load("http://image.tmdb.org/t/p/w185" + path)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
-                .fitCenter()
+                .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .into(holder.poster);
         Log.e("POSTER PATH: ", path);
