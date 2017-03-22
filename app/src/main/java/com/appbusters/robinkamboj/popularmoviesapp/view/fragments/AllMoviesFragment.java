@@ -117,6 +117,7 @@ public class AllMoviesFragment extends Fragment {
                                                 List<Movie> movies = response.body().getResults();
                                                 adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
                                                 if(adapter.getItemCount()>0){
+                                                    recyclerView.setVisibility(View.VISIBLE);
                                                     recyclerView.setAdapter(adapter);
                                                     alternate_layout.setVisibility(View.INVISIBLE);
                                                 }
@@ -140,6 +141,7 @@ public class AllMoviesFragment extends Fragment {
                                                     List<Movie> movies = response.body().getResults();
                                                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
                                                     if(adapter.getItemCount()>0){
+                                                        recyclerView.setVisibility(View.VISIBLE);
                                                         recyclerView.setAdapter(adapter);
                                                         alternate_layout.setVisibility(View.INVISIBLE);
                                                     }
@@ -164,6 +166,7 @@ public class AllMoviesFragment extends Fragment {
                                                     List<Movie> movies = response.body().getResults();
                                                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
                                                     if(adapter.getItemCount()>0){
+                                                        recyclerView.setVisibility(View.VISIBLE);
                                                         recyclerView.setAdapter(adapter);
                                                         alternate_layout.setVisibility(View.INVISIBLE);
                                                     }
