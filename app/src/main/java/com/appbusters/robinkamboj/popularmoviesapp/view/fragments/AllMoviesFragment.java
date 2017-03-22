@@ -131,10 +131,50 @@ public class AllMoviesFragment extends Fragment {
                                     }
                                     case 1:{
                                         Log.e("which?", "Most Popular");
+                                        apiService = ApiClient.getClient().create(ApiInterface.class);
+                                        Call<MoviesResponse> call = apiService.getMostPopularMovies(API_KEY);
+                                        call.enqueue(new Callback<MoviesResponse>() {
+                                            @Override
+                                            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                                                if(response.body()!=null){
+                                                    List<Movie> movies = response.body().getResults();
+                                                    adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                                                    if(adapter.getItemCount()>0){
+                                                        recyclerView.setAdapter(adapter);
+                                                        alternate_layout.setVisibility(View.INVISIBLE);
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                                            }
+                                        });
                                         break;
                                     }
                                     case 2:{
                                         Log.e("which?", "Most Rated");
+                                        apiService = ApiClient.getClient().create(ApiInterface.class);
+                                        Call<MoviesResponse> call = apiService.getMostRatedMovies(API_KEY);
+                                        call.enqueue(new Callback<MoviesResponse>() {
+                                            @Override
+                                            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                                                if(response.body()!=null){
+                                                    List<Movie> movies = response.body().getResults();
+                                                    adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                                                    if(adapter.getItemCount()>0){
+                                                        recyclerView.setAdapter(adapter);
+                                                        alternate_layout.setVisibility(View.INVISIBLE);
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                                            }
+                                        });
                                         break;
                                     }
                                 }
