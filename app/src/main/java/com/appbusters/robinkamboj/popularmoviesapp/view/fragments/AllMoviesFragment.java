@@ -2,11 +2,9 @@ package com.appbusters.robinkamboj.popularmoviesapp.view.fragments;
 
 
 import android.content.DialogInterface;
-import android.media.ImageReader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
@@ -25,7 +22,6 @@ import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
 import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
-import com.appbusters.robinkamboj.popularmoviesapp.view.activities.MainActivity;
 
 import java.util.List;
 
@@ -33,10 +29,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AllMoviesFragment extends Fragment {
 
     private static final String TAG = AllMoviesFragment.class.getSimpleName();
@@ -117,6 +109,24 @@ public class AllMoviesFragment extends Fragment {
                                 switch (which){
                                     case 0:{
                                         Log.e("which?", "Highest Rated");
+                                        apiService = ApiClient.getClient().create(ApiInterface.class);
+                                        Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
+                                        call.enqueue(new Callback<MoviesResponse>() {
+                                            @Override
+                                            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                                                List<Movie> movies = response.body().getResults();
+                                                adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                                                if(adapter.getItemCount()>0){
+                                                    recyclerView.setAdapter(adapter);
+                                                    alternate_layout.setVisibility(View.INVISIBLE);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                                            }
+                                        });
                                         break;
                                     }
                                     case 1:{
