@@ -70,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
                 .into(poster);
 
         Log.e("DETAILS", title + "\n" + poster_path + "\n" + backdrop_path + "\n" + vote_average + "\n" + is_adult + "\n" + is_video
-                + "\n" + vote_count + "\n" + release_date + "\n" + popularity + "\n" + original_language);
+                + "\n" + vote_count + "\n" + release_date + "\n" + popularity + "\n" + id + "\n" + original_language);
 
         ViewTarget view_target = new ViewTarget(toolbar_layout);
 
