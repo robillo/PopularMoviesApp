@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -59,6 +60,8 @@ public class AllMoviesFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_all_movies, container, false);
 
         setHasOptionsMenu(true);
+
+//        setRetainInstance(true);
 
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         alternate_layout = (LinearLayout) v.findViewById(R.id.alternate_layout);
@@ -310,5 +313,20 @@ public class AllMoviesFragment extends Fragment{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("WHICH_FILTER", which_filter);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        if(savedInstanceState!=null){
+            which_filter = savedInstanceState.getInt("WHICH_FILTER");
+            Log.e("THE FILTER IS", " " + which_filter);
+        }
+        super.onActivityCreated(savedInstanceState);
     }
 }
