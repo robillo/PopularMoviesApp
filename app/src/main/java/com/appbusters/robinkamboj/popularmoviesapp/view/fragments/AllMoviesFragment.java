@@ -46,6 +46,7 @@ public class AllMoviesFragment extends Fragment{
     private ApiInterface apiService;
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout refreshLayout;
+    private int which_filter = 0;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -99,6 +100,87 @@ public class AllMoviesFragment extends Fragment{
             public void onRefresh() {
                 Log.e("ON REFRESH CALLED", "onRefresh called from SwipeRefreshLayout");
                 Handler handler = new Handler();
+                Handler handler1 = new Handler();
+                handler1.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (which_filter){
+                            case 1:{
+                                Log.e("which?", "Highest Rated");
+                                apiService = ApiClient.getClient().create(ApiInterface.class);
+                                Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
+                                call.enqueue(new Callback<MoviesResponse>() {
+                                    @Override
+                                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                                        List<Movie> movies = response.body().getResults();
+                                        adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                                        if(adapter.getItemCount()>0){
+                                            recyclerView.setVisibility(View.VISIBLE);
+                                            recyclerView.setAdapter(adapter);
+                                            alternate_layout.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                                    }
+                                });
+                                break;
+                            }
+                            case 2:{
+                                Log.e("which?", "Most Popular");
+                                apiService = ApiClient.getClient().create(ApiInterface.class);
+                                Call<MoviesResponse> call = apiService.getMostPopularMovies(API_KEY);
+                                call.enqueue(new Callback<MoviesResponse>() {
+                                    @Override
+                                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                                        if(response.body()!=null){
+                                            List<Movie> movies = response.body().getResults();
+                                            adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                                            if(adapter.getItemCount()>0){
+                                                recyclerView.setVisibility(View.VISIBLE);
+                                                recyclerView.setAdapter(adapter);
+                                                alternate_layout.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                                    }
+                                });
+                                break;
+                            }
+                            case 3:{
+                                Log.e("which?", "Most Rated");
+                                apiService = ApiClient.getClient().create(ApiInterface.class);
+                                Call<MoviesResponse> call = apiService.getMostRatedMovies(API_KEY);
+                                call.enqueue(new Callback<MoviesResponse>() {
+                                    @Override
+                                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                                        if(response.body()!=null){
+                                            List<Movie> movies = response.body().getResults();
+                                            adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                                            if(adapter.getItemCount()>0){
+                                                recyclerView.setVisibility(View.VISIBLE);
+                                                recyclerView.setAdapter(adapter);
+                                                alternate_layout.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
+                });
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -140,6 +222,7 @@ public class AllMoviesFragment extends Fragment{
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 switch (which){
                                     case 0:{
+                                        which_filter = 0;
                                         Log.e("which?", "Highest Rated");
                                         apiService = ApiClient.getClient().create(ApiInterface.class);
                                         Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
@@ -163,6 +246,7 @@ public class AllMoviesFragment extends Fragment{
                                         break;
                                     }
                                     case 1:{
+                                        which_filter = 1;
                                         Log.e("which?", "Most Popular");
                                         apiService = ApiClient.getClient().create(ApiInterface.class);
                                         Call<MoviesResponse> call = apiService.getMostPopularMovies(API_KEY);
@@ -188,6 +272,7 @@ public class AllMoviesFragment extends Fragment{
                                         break;
                                     }
                                     case 2:{
+                                        which_filter = 2;
                                         Log.e("which?", "Most Rated");
                                         apiService = ApiClient.getClient().create(ApiInterface.class);
                                         Call<MoviesResponse> call = apiService.getMostRatedMovies(API_KEY);
