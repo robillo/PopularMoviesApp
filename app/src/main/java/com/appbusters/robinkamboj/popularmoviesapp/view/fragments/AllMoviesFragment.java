@@ -74,12 +74,14 @@ public class AllMoviesFragment extends Fragment {
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 int statusCode = response.code();
                 List<Movie> movies = response.body().getResults();
-                adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                if(adapter.getItemCount()>0){
-                    recyclerView.setVisibility(View.VISIBLE);
-                    alternate_layout.setVisibility(View.INVISIBLE);
+                if(movies.size()>0){
+                    adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                    if(adapter.getItemCount()>0){
+                        recyclerView.setVisibility(View.VISIBLE);
+                        alternate_layout.setVisibility(View.INVISIBLE);
+                    }
+                    recyclerView.setAdapter(adapter);
                 }
-                recyclerView.setAdapter(adapter);
             }
 
             @Override
