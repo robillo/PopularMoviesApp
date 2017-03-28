@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AllMoviesFragment extends Fragment {
+public class AllMoviesFragment extends Fragment{
 
     private static final String TAG = AllMoviesFragment.class.getSimpleName();
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
@@ -43,6 +45,7 @@ public class AllMoviesFragment extends Fragment {
     private LinearLayout alternate_layout;
     private ApiInterface apiService;
     private GridLayoutManager gridLayoutManager;
+    private SwipeRefreshLayout refreshLayout;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -56,6 +59,7 @@ public class AllMoviesFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
+        refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         alternate_layout = (LinearLayout) v.findViewById(R.id.alternate_layout);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
 
@@ -87,6 +91,20 @@ public class AllMoviesFragment extends Fragment {
             @Override
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 Log.e(TAG, t.toString());
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.e("ON REFRESH CALLED", "onRefresh called from SwipeRefreshLayout");
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                },1000);
             }
         });
 
@@ -208,5 +226,4 @@ public class AllMoviesFragment extends Fragment {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
