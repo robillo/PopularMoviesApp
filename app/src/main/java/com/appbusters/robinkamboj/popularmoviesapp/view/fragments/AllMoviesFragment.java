@@ -46,7 +46,7 @@ public class AllMoviesFragment extends Fragment{
     private ApiInterface apiService;
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout refreshLayout;
-    private int which_filter = 0;
+    private static int which_filter = 0;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -68,7 +68,7 @@ public class AllMoviesFragment extends Fragment{
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         }
         else if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 4);
+            gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3);
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
@@ -105,7 +105,7 @@ public class AllMoviesFragment extends Fragment{
                     @Override
                     public void run() {
                         switch (which_filter){
-                            case 1:{
+                            case 0:{
                                 Log.e("which?", "Highest Rated");
                                 apiService = ApiClient.getClient().create(ApiInterface.class);
                                 Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
@@ -128,7 +128,7 @@ public class AllMoviesFragment extends Fragment{
                                 });
                                 break;
                             }
-                            case 2:{
+                            case 1:{
                                 Log.e("which?", "Most Popular");
                                 apiService = ApiClient.getClient().create(ApiInterface.class);
                                 Call<MoviesResponse> call = apiService.getMostPopularMovies(API_KEY);
@@ -153,7 +153,7 @@ public class AllMoviesFragment extends Fragment{
                                 });
                                 break;
                             }
-                            case 3:{
+                            case 2:{
                                 Log.e("which?", "Most Rated");
                                 apiService = ApiClient.getClient().create(ApiInterface.class);
                                 Call<MoviesResponse> call = apiService.getMostRatedMovies(API_KEY);
