@@ -16,7 +16,7 @@
         android:background="@drawable/card_background">
 
         <ImageView
-            android:layout_width="185sp"
+            android:layout_width="match_parent"
             android:layout_height="270sp"
             android:id="@+id/poster"
             android:src="@drawable/placeholder"

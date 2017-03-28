@@ -4,6 +4,7 @@ package com.appbusters.robinkamboj.popularmoviesapp.view.fragments;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -41,6 +42,7 @@ public class AllMoviesFragment extends Fragment {
     private MoviesAdapter adapter;
     private LinearLayout alternate_layout;
     private ApiInterface apiService;
+    private GridLayoutManager gridLayoutManager;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -56,7 +58,13 @@ public class AllMoviesFragment extends Fragment {
 
         alternate_layout = (LinearLayout) v.findViewById(R.id.alternate_layout);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
+
+        if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
+        }
+        else if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 4);
+        }
         recyclerView.setLayoutManager(gridLayoutManager);
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
