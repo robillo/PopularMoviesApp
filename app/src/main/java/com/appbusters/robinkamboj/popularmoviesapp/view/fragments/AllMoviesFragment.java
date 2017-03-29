@@ -71,28 +71,8 @@ public class AllMoviesFragment extends Fragment{
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        callMovies();
-
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.e("ON REFRESH CALLED", "onRefresh called from SwipeRefreshLayout");
-                Handler handler = new Handler();
-                Handler handler1 = new Handler();
-                handler1.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callMovies();
-                    }
-                });
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshLayout.setRefreshing(false);
-                    }
-                },1500);
-            }
-        });
+//        callMovies();
+        refresh();
 
         return v;
     }
@@ -128,19 +108,22 @@ public class AllMoviesFragment extends Fragment{
                                     case 0:{
                                         which_filter = 0;
                                         Log.e("which?", "Highest Rated");
-                                        callMovies();
+//                                        callMovies();
+                                        refresh();
                                         break;
                                     }
                                     case 1:{
                                         which_filter = 1;
                                         Log.e("which?", "Most Popular");
-                                        callMovies();
+//                                        callMovies();
+                                        refresh();
                                         break;
                                     }
                                     case 2:{
                                         which_filter = 2;
                                         Log.e("which?", "Most Rated");
-                                        callMovies();
+//                                        callMovies();
+                                        refresh();
                                         break;
                                     }
                                 }
@@ -209,5 +192,28 @@ public class AllMoviesFragment extends Fragment{
                 }
             });
         }
+    }
+
+    private void refresh(){
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.e("ON REFRESH CALLED", "onRefresh called from SwipeRefreshLayout");
+                Handler handler = new Handler();
+                Handler handler1 = new Handler();
+                handler1.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callMovies();
+                    }
+                });
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                },1500);
+            }
+        });
     }
 }
