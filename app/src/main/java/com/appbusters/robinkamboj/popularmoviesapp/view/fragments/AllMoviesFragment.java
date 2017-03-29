@@ -71,9 +71,7 @@ public class AllMoviesFragment extends Fragment{
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
-//        callMovies();
-        refresh();
-
+        callMovies();
         return v;
     }
 
@@ -108,22 +106,19 @@ public class AllMoviesFragment extends Fragment{
                                     case 0:{
                                         which_filter = 0;
                                         Log.e("which?", "Highest Rated");
-//                                        callMovies();
-                                        refresh();
+                                        callMovies();
                                         break;
                                     }
                                     case 1:{
                                         which_filter = 1;
                                         Log.e("which?", "Most Popular");
-//                                        callMovies();
-                                        refresh();
+                                        callMovies();
                                         break;
                                     }
                                     case 2:{
                                         which_filter = 2;
                                         Log.e("which?", "Most Rated");
-//                                        callMovies();
-                                        refresh();
+                                        callMovies();
                                         break;
                                     }
                                 }
