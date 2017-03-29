@@ -229,6 +229,7 @@ public class AllMoviesFragment extends Fragment{
                                 recyclerView.setAdapter(adapter);
                                 alternate_layout.setVisibility(View.INVISIBLE);
                                 page_number++;
+                                nextPageResults(page_number, movies);
                             }
                         }
 
@@ -280,12 +281,9 @@ public class AllMoviesFragment extends Fragment{
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                     movies.addAll(response.body().getResults());
                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                    if(adapter.getItemCount()>0){
-                        recyclerView.setVisibility(View.VISIBLE);
-                        recyclerView.setAdapter(adapter);
-                        alternate_layout.setVisibility(View.INVISIBLE);
-                        page_number++;
-                    }
+                    adapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapter);
+                    page_number++;
                 }
 
                 @Override
