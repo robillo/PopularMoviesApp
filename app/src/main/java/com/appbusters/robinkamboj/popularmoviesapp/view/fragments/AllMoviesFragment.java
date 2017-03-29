@@ -71,28 +71,7 @@ public class AllMoviesFragment extends Fragment{
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
-        call.enqueue(new Callback<MoviesResponse>() {
-            @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                int statusCode = response.code();
-                List<Movie> movies = response.body().getResults();
-                if(movies.size()>0){
-                    adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                    if(adapter.getItemCount()>0){
-                        recyclerView.setVisibility(View.VISIBLE);
-                        alternate_layout.setVisibility(View.INVISIBLE);
-                    }
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                Log.e(TAG, t.toString());
-            }
-        });
+        callMovies();
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -103,81 +82,7 @@ public class AllMoviesFragment extends Fragment{
                 handler1.post(new Runnable() {
                     @Override
                     public void run() {
-                        switch (which_filter){
-                            case 0:{
-                                Log.e("which?", "Highest Rated");
-                                apiService = ApiClient.getClient().create(ApiInterface.class);
-                                Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
-                                call.enqueue(new Callback<MoviesResponse>() {
-                                    @Override
-                                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                                        List<Movie> movies = response.body().getResults();
-                                        adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                                        if(adapter.getItemCount()>0){
-                                            recyclerView.setVisibility(View.VISIBLE);
-                                            recyclerView.setAdapter(adapter);
-                                            alternate_layout.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-
-                                    }
-                                });
-                                break;
-                            }
-                            case 1:{
-                                Log.e("which?", "Most Popular");
-                                apiService = ApiClient.getClient().create(ApiInterface.class);
-                                Call<MoviesResponse> call = apiService.getMostPopularMovies(API_KEY);
-                                call.enqueue(new Callback<MoviesResponse>() {
-                                    @Override
-                                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                                        if(response.body()!=null){
-                                            List<Movie> movies = response.body().getResults();
-                                            adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                                            if(adapter.getItemCount()>0){
-                                                recyclerView.setVisibility(View.VISIBLE);
-                                                recyclerView.setAdapter(adapter);
-                                                alternate_layout.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-
-                                    }
-                                });
-                                break;
-                            }
-                            case 2:{
-                                Log.e("which?", "Most Rated");
-                                apiService = ApiClient.getClient().create(ApiInterface.class);
-                                Call<MoviesResponse> call = apiService.getMostRatedMovies(API_KEY);
-                                call.enqueue(new Callback<MoviesResponse>() {
-                                    @Override
-                                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                                        if(response.body()!=null){
-                                            List<Movie> movies = response.body().getResults();
-                                            adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                                            if(adapter.getItemCount()>0){
-                                                recyclerView.setVisibility(View.VISIBLE);
-                                                recyclerView.setAdapter(adapter);
-                                                alternate_layout.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-
-                                    }
-                                });
-                                break;
-                            }
-                        }
+                        callMovies();
                     }
                 });
                 handler.postDelayed(new Runnable() {
@@ -185,7 +90,7 @@ public class AllMoviesFragment extends Fragment{
                     public void run() {
                         refreshLayout.setRefreshing(false);
                     }
-                },1000);
+                },1500);
             }
         });
 
@@ -324,5 +229,43 @@ public class AllMoviesFragment extends Fragment{
             Log.e("THE FILTER IS", " " + which_filter);
         }
         super.onActivityCreated(savedInstanceState);
+    }
+
+    private void callMovies(){
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<MoviesResponse> call = null;
+        switch (which_filter){
+            case 0:{
+                call = apiService.getTopRatedMovies(API_KEY);
+                break;
+            }
+            case 1:{
+                call = apiService.getMostPopularMovies(API_KEY);
+                break;
+            }
+            case 2:{
+                call = apiService.getMostRatedMovies(API_KEY);
+                break;
+            }
+        }
+        if (call != null) {
+            call.enqueue(new Callback<MoviesResponse>() {
+                @Override
+                public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                    List<Movie> movies = response.body().getResults();
+                    adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                    if(adapter.getItemCount()>0){
+                        recyclerView.setVisibility(View.VISIBLE);
+                        recyclerView.setAdapter(adapter);
+                        alternate_layout.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                }
+            });
+        }
     }
 }
