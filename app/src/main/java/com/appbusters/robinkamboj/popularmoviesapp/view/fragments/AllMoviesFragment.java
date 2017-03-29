@@ -34,7 +34,6 @@ import retrofit2.Response;
 
 public class AllMoviesFragment extends Fragment{
 
-    private static final String TAG = AllMoviesFragment.class.getSimpleName();
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
     private CharSequence items[] = {"Highest Rated", "Most Popular", "Most Rated"};
     private RecyclerView recyclerView;
@@ -56,8 +55,6 @@ public class AllMoviesFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_all_movies, container, false);
 
         setHasOptionsMenu(true);
-
-//        setRetainInstance(true);
 
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         alternate_layout = (LinearLayout) v.findViewById(R.id.alternate_layout);
