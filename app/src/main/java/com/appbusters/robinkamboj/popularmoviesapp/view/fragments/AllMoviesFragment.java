@@ -72,6 +72,8 @@ public class AllMoviesFragment extends Fragment{
         recyclerView.setLayoutManager(gridLayoutManager);
 
         callMovies();
+        refresh();
+
         return v;
     }
 
