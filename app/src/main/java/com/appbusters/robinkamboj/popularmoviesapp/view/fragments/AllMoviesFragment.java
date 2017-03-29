@@ -43,6 +43,7 @@ public class AllMoviesFragment extends Fragment{
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout refreshLayout;
     private static int which_filter = 0;
+    private int page_number = 1;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -138,6 +139,7 @@ public class AllMoviesFragment extends Fragment{
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt("WHICH_FILTER", which_filter);
+        outState.putInt("WHICH_PAGE", page_number);
         super.onSaveInstanceState(outState);
     }
 
@@ -145,6 +147,7 @@ public class AllMoviesFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         if(savedInstanceState!=null){
             which_filter = savedInstanceState.getInt("WHICH_FILTER");
+            page_number = savedInstanceState.getInt("WHICH_PAGE");
             Log.e("THE FILTER IS", " " + which_filter);
         }
         super.onActivityCreated(savedInstanceState);
@@ -155,15 +158,15 @@ public class AllMoviesFragment extends Fragment{
         Call<MoviesResponse> call = null;
         switch (which_filter){
             case 0:{
-                call = apiService.getTopRatedMovies(API_KEY);
+                call = apiService.getTopRatedMovies(API_KEY, page_number);
                 break;
             }
             case 1:{
-                call = apiService.getMostPopularMovies(API_KEY);
+                call = apiService.getMostPopularMovies(API_KEY, page_number);
                 break;
             }
             case 2:{
-                call = apiService.getMostRatedMovies(API_KEY);
+                call = apiService.getMostRatedMovies(API_KEY, page_number);
                 break;
             }
         }
@@ -177,6 +180,7 @@ public class AllMoviesFragment extends Fragment{
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter(adapter);
                         alternate_layout.setVisibility(View.INVISIBLE);
+                        page_number++;
                     }
                 }
 
