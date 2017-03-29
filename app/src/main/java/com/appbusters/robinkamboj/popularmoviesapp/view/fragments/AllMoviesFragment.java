@@ -44,8 +44,8 @@ public class AllMoviesFragment extends Fragment{
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout refreshLayout;
     private static int which_filter = 0;
-    private static final int page_number = 1;
-    private static final List<Movie> movies = Collections.emptyList();
+    private int page_number = 1;
+    private List<Movie> movies = Collections.emptyList();
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -257,7 +257,7 @@ public class AllMoviesFragment extends Fragment{
         });
     }
 
-    private void nextPageResults(final int page_number, final List<Movie> movies){
+    private void nextPageResults(final int page, final List<Movie> movies){
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = null;
         switch (which_filter){
