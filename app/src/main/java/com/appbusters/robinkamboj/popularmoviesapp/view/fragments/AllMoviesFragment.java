@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,8 +28,11 @@ import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,7 +53,7 @@ public class AllMoviesFragment extends Fragment{
     private EndlessScrollListener scrollListener;
     private static int which_filter = 0;
     private int page_number = 2;
-    private List<Movie> movies = Collections.emptyList();
+    private List<Movie> movies;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -75,7 +79,128 @@ public class AllMoviesFragment extends Fragment{
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        callMovies();
+        movies = new List<Movie>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @NonNull
+            @Override
+            public Iterator<Movie> iterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @NonNull
+            @Override
+            public <T> T[] toArray(@NonNull T[] ts) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Movie movie) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(@NonNull Collection<? extends Movie> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int i, @NonNull Collection<? extends Movie> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Movie get(int i) {
+                return null;
+            }
+
+            @Override
+            public Movie set(int i, Movie movie) {
+                return null;
+            }
+
+            @Override
+            public void add(int i, Movie movie) {
+
+            }
+
+            @Override
+            public Movie remove(int i) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Movie> listIterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<Movie> listIterator(int i) {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public List<Movie> subList(int i, int i1) {
+                return null;
+            }
+        };
+        nextPageResults(movies);
         refresh();
 
         return v;
@@ -260,7 +385,7 @@ public class AllMoviesFragment extends Fragment{
         });
     }
 
-    private void nextPageResults(final int page, final List<Movie> movies){
+    private void nextPageResults(final List<Movie> moviez){
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = null;
         switch (which_filter){
@@ -281,10 +406,11 @@ public class AllMoviesFragment extends Fragment{
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                    movies.addAll(response.body().getResults());
+                    moviez.addAll(response.body().getResults());
                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
                     adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);scrollListener = new EndlessScrollListener(gridLayoutManager) {
+                    recyclerView.setAdapter(adapter);
+                    scrollListener = new EndlessScrollListener(gridLayoutManager) {
                         @Override
                         public int getFooterViewType(int defaultNoFooterViewType) {
                             return defaultNoFooterViewType;

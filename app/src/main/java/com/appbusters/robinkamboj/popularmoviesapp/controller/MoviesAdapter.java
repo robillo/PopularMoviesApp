@@ -60,7 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
         });
     }
 
-    public void clear(){
+    public void Clear(){
         movies.clear();
         notifyDataSetChanged();
     }
