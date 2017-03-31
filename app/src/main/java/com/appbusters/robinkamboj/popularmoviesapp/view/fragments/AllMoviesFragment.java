@@ -406,8 +406,13 @@ public class AllMoviesFragment extends Fragment{
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                    moviez.addAll(response.body().getResults());
+                    movies.addAll(response.body().getResults());
                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                    if(adapter.getItemCount()>0){
+                        recyclerView.setVisibility(View.VISIBLE);
+                        recyclerView.setAdapter(adapter);
+                        alternate_layout.setVisibility(View.INVISIBLE);
+                    }
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     scrollListener = new EndlessScrollListener(gridLayoutManager) {
