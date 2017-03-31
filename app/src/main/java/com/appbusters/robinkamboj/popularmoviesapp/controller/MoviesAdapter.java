@@ -60,6 +60,17 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
         });
     }
 
+    public void clear(){
+        movies.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items
+    public void addAll(List<Movie> list) {
+        movies.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return movies.size();
