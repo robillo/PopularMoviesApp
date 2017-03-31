@@ -12,11 +12,12 @@ import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
 
-    private List<Movie> movies;
+    private List<Movie> movies = Collections.emptyList();
     private int rowLayout;
     private Context context;
 

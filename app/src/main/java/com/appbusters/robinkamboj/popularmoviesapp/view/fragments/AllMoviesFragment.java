@@ -49,7 +49,7 @@ public class AllMoviesFragment extends Fragment{
     private SwipeRefreshLayout refreshLayout;
     private EndlessScrollListener scrollListener;
     private static int which_filter = 0;
-    private int page_number = 2;
+    private int page_number = 1;
     private List<Movie> movies;
 
     public AllMoviesFragment() {
@@ -76,20 +76,6 @@ public class AllMoviesFragment extends Fragment{
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setAdapter(adapter);
-        scrollListener = new EndlessScrollListener(gridLayoutManager) {
-            @Override
-            public int getFooterViewType(int defaultNoFooterViewType) {
-                return -1;
-            }
-
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
-                loadNextDataFromApi(page);
-            }
-        };
         // Adds the scroll listener to RecyclerView
         recyclerView.addOnScrollListener(scrollListener);
 
@@ -214,7 +200,24 @@ public class AllMoviesFragment extends Fragment{
                 return null;
             }
         };
-        nextPageResults(movies);
+
+        scrollListener = new EndlessScrollListener(gridLayoutManager) {
+            @Override
+            public int getFooterViewType(int defaultNoFooterViewType) {
+                return -1;
+            }
+
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page, movies);
+            }
+        };
+
+        loadNextDataFromApi(page_number, movies);
+
+//        nextPageResults();
         refresh();
 
         return v;
@@ -300,21 +303,21 @@ public class AllMoviesFragment extends Fragment{
         }
         super.onActivityCreated(savedInstanceState);
     }
-    private void loadNextDataFromApi(int page) {
+    private void loadNextDataFromApi(int page, final List<Movie> movies1) {
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = null;
         switch (which_filter){
             case 0:{
-                call = apiService.getTopRatedMovies(API_KEY, page_number);
+                call = apiService.getTopRatedMovies(API_KEY, page);
                 break;
             }
             case 1:{
-                call = apiService.getMostPopularMovies(API_KEY, page_number);
+                call = apiService.getMostPopularMovies(API_KEY, page);
                 break;
             }
             case 2:{
-                call = apiService.getMostRatedMovies(API_KEY, page_number);
+                call = apiService.getMostRatedMovies(API_KEY, page);
                 break;
             }
         }
@@ -323,9 +326,17 @@ public class AllMoviesFragment extends Fragment{
                 @Override
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                     for (Movie singleMovie : response.body().getResults()) {
-                        movies.add(singleMovie);
+                        movies1.add(singleMovie);
+                        Log.e("Single Movie", singleMovie.getTitle());
                     }
-                    adapter.notifyDataSetChanged();
+                    adapter = new MoviesAdapter(movies1, R.layout.row_layout, getActivity().getApplicationContext());
+                    Log.e("Adapter", " " + adapter.getItemCount());
+                    if(adapter.getItemCount()>0){
+                        recyclerView.setVisibility(View.VISIBLE);
+                        recyclerView.setAdapter(adapter);
+                        alternate_layout.setVisibility(View.INVISIBLE);
+                        page_number++;
+                    }
                 }
 
                 @Override
@@ -334,7 +345,6 @@ public class AllMoviesFragment extends Fragment{
                 }
             });
         }
-        page_number++;
     }
 
     private void callMovies(){
@@ -435,7 +445,7 @@ public class AllMoviesFragment extends Fragment{
         });
     }
 
-    private void nextPageResults(final List<Movie> moviez){
+    private void nextPageResults(){
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = null;
         switch (which_filter){
