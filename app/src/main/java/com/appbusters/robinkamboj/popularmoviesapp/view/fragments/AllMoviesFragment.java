@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
+import com.appbusters.robinkamboj.popularmoviesapp.controller.EndlessScrollListener;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.MoviesAdapter;
 import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
 import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
@@ -33,6 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.appbusters.robinkamboj.popularmoviesapp.R.attr.layoutManager;
+
 public class AllMoviesFragment extends Fragment{
 
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
@@ -43,8 +46,9 @@ public class AllMoviesFragment extends Fragment{
     private ApiInterface apiService;
     private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout refreshLayout;
+    private EndlessScrollListener scrollListener;
     private static int which_filter = 0;
-    private int page_number = 1;
+    private int page_number = 2;
     private List<Movie> movies = Collections.emptyList();
 
     public AllMoviesFragment() {
@@ -228,8 +232,6 @@ public class AllMoviesFragment extends Fragment{
                                 recyclerView.setVisibility(View.VISIBLE);
                                 recyclerView.setAdapter(adapter);
                                 alternate_layout.setVisibility(View.INVISIBLE);
-                                page_number++;
-                                nextPageResults(page_number, movies);
                             }
                         }
 
@@ -282,8 +284,21 @@ public class AllMoviesFragment extends Fragment{
                     movies.addAll(response.body().getResults());
                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
                     adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);
-                    page_number++;
+                    recyclerView.setAdapter(adapter);scrollListener = new EndlessScrollListener(gridLayoutManager) {
+                        @Override
+                        public int getFooterViewType(int defaultNoFooterViewType) {
+                            return defaultNoFooterViewType;
+                        }
+
+                        @Override
+                        public void onLoadMore(int page, int totalItemsCount) {
+                            // Triggered only when new data needs to be appended to the list
+                            // Add whatever code is needed to append new items to the bottom of the list
+                            callMovies();
+                        }
+                    };
+                    // Adds the scroll listener to RecyclerView
+                    recyclerView.addOnScrollListener(scrollListener);
                 }
 
                 @Override
