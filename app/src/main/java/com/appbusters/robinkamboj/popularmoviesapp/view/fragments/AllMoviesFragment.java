@@ -29,7 +29,6 @@ import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -37,8 +36,6 @@ import java.util.ListIterator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.appbusters.robinkamboj.popularmoviesapp.R.attr.layoutManager;
 
 public class AllMoviesFragment extends Fragment{
 
@@ -78,6 +75,23 @@ public class AllMoviesFragment extends Fragment{
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3);
         }
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        recyclerView.setAdapter(adapter);
+        scrollListener = new EndlessScrollListener(gridLayoutManager) {
+            @Override
+            public int getFooterViewType(int defaultNoFooterViewType) {
+                return -1;
+            }
+
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page);
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        recyclerView.addOnScrollListener(scrollListener);
 
         movies = new List<Movie>() {
             @Override
@@ -286,6 +300,42 @@ public class AllMoviesFragment extends Fragment{
         }
         super.onActivityCreated(savedInstanceState);
     }
+    private void loadNextDataFromApi(int page) {
+
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<MoviesResponse> call = null;
+        switch (which_filter){
+            case 0:{
+                call = apiService.getTopRatedMovies(API_KEY, page_number);
+                break;
+            }
+            case 1:{
+                call = apiService.getMostPopularMovies(API_KEY, page_number);
+                break;
+            }
+            case 2:{
+                call = apiService.getMostRatedMovies(API_KEY, page_number);
+                break;
+            }
+        }
+        if (call != null) {
+            call.enqueue(new Callback<MoviesResponse>() {
+                @Override
+                public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                    for (Movie singleMovie : response.body().getResults()) {
+                        movies.add(singleMovie);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                }
+            });
+        }
+        page_number++;
+    }
 
     private void callMovies(){
         apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -414,22 +464,7 @@ public class AllMoviesFragment extends Fragment{
                         alternate_layout.setVisibility(View.INVISIBLE);
                     }
                     adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);
-                    scrollListener = new EndlessScrollListener(gridLayoutManager) {
-                        @Override
-                        public int getFooterViewType(int defaultNoFooterViewType) {
-                            return defaultNoFooterViewType;
-                        }
 
-                        @Override
-                        public void onLoadMore(int page, int totalItemsCount) {
-                            // Triggered only when new data needs to be appended to the list
-                            // Add whatever code is needed to append new items to the bottom of the list
-                            callMovies();
-                        }
-                    };
-                    // Adds the scroll listener to RecyclerView
-                    recyclerView.addOnScrollListener(scrollListener);
                 }
 
                 @Override
