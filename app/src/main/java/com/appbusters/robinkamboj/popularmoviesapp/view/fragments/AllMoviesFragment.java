@@ -76,6 +76,20 @@ public class AllMoviesFragment extends Fragment{
         }
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        scrollListener = new EndlessScrollListener(gridLayoutManager) {
+            @Override
+            public int getFooterViewType(int defaultNoFooterViewType) {
+                return -1;
+            }
+
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page, movies);
+            }
+        };
+        
         // Adds the scroll listener to RecyclerView
         recyclerView.addOnScrollListener(scrollListener);
 
@@ -201,20 +215,6 @@ public class AllMoviesFragment extends Fragment{
             }
         };
 
-        scrollListener = new EndlessScrollListener(gridLayoutManager) {
-            @Override
-            public int getFooterViewType(int defaultNoFooterViewType) {
-                return -1;
-            }
-
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
-                loadNextDataFromApi(page, movies);
-            }
-        };
-
         loadNextDataFromApi(page_number, movies);
 
 //        nextPageResults();
@@ -254,19 +254,19 @@ public class AllMoviesFragment extends Fragment{
                                     case 0:{
                                         which_filter = 0;
                                         Log.e("which?", "Highest Rated");
-                                        callMovies();
+                                        callMovies(page_number, movies);
                                         break;
                                     }
                                     case 1:{
                                         which_filter = 1;
                                         Log.e("which?", "Most Popular");
-                                        callMovies();
+                                        callMovies(page_number, movies);
                                         break;
                                     }
                                     case 2:{
                                         which_filter = 2;
                                         Log.e("which?", "Most Rated");
-                                        callMovies();
+                                        callMovies(page_number, movies);
                                         break;
                                     }
                                 }
@@ -347,20 +347,20 @@ public class AllMoviesFragment extends Fragment{
         }
     }
 
-    private void callMovies(){
+    private void callMovies(int page, final List<Movie> movies1){
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = null;
         switch (which_filter){
             case 0:{
-                call = apiService.getTopRatedMovies(API_KEY, page_number);
+                call = apiService.getTopRatedMovies(API_KEY, page);
                 break;
             }
             case 1:{
-                call = apiService.getMostPopularMovies(API_KEY, page_number);
+                call = apiService.getMostPopularMovies(API_KEY, page);
                 break;
             }
             case 2:{
-                call = apiService.getMostRatedMovies(API_KEY, page_number);
+                call = apiService.getMostRatedMovies(API_KEY, page);
                 break;
             }
         }
@@ -368,8 +368,12 @@ public class AllMoviesFragment extends Fragment{
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                    movies = response.body().getResults();
+                    for (Movie singleMovie : response.body().getResults()) {
+                        movies1.add(singleMovie);
+                        Log.e("Single Movie", singleMovie.getTitle());
+                    }
                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+                    Log.e("ADAPTER COUNT IS", " " + adapter.getItemCount());
                     if(adapter.getItemCount()>0){
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter(adapter);
@@ -432,7 +436,7 @@ public class AllMoviesFragment extends Fragment{
                 handler1.post(new Runnable() {
                     @Override
                     public void run() {
-                        callMovies();
+                        callMovies(page_number, movies);
                     }
                 });
                 handler.postDelayed(new Runnable() {
