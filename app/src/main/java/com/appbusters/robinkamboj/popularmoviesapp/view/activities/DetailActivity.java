@@ -17,9 +17,12 @@ import android.widget.TextView;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ReviewsAdapter;
+import com.appbusters.robinkamboj.popularmoviesapp.controller.VideosAdapter;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ViewTarget;
 import com.appbusters.robinkamboj.popularmoviesapp.model.Review;
 import com.appbusters.robinkamboj.popularmoviesapp.model.ReviewsResponse;
+import com.appbusters.robinkamboj.popularmoviesapp.model.Video;
+import com.appbusters.robinkamboj.popularmoviesapp.model.VideosResponse;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 import com.bumptech.glide.Glide;
@@ -38,8 +41,9 @@ public class DetailActivity extends AppCompatActivity {
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
     private ApiInterface apiService;
     private List<Review> reviews;
+    private List<Video> videos;
     private RecyclerView reviews_rv, recyclerview_vd;
-    private CardView reviews_card;
+    private CardView reviews_card, videos_card;
     private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview;
     private int id;
     private CollapsingToolbarLayout toolbar_layout;
@@ -56,6 +60,7 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        videos_card = (CardView) findViewById(R.id.videos_card);
         reviews_card = (CardView) findViewById(R.id.reviews_card);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         recyclerview_vd = (RecyclerView) findViewById(R.id.recyclerview_vd);
@@ -116,6 +121,7 @@ public class DetailActivity extends AppCompatActivity {
 
         reviews = Collections.emptyList();
         callReviews();
+        callVideos();
     }
 
     private void callReviews(){
@@ -141,6 +147,35 @@ public class DetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ReviewsResponse> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
+    private void callVideos(){
+        Call<VideosResponse> call = apiService.searchMovieVideos(id, API_KEY);
+        if(call!=null){
+            call.enqueue(new Callback<VideosResponse>() {
+                @Override
+                public void onResponse(Call<VideosResponse> call, Response<VideosResponse> response) {
+                    videos = new ArrayList<Video>();
+                    videos = response.body().getResults();
+                    for(Review singleReview : reviews){
+                        Log.e("Review", singleReview.getContent());
+//                        reviews.add(singleReview);
+                    }
+                    if(reviews.size()>0){
+                        videos_card.setVisibility(View.VISIBLE);
+                        recyclerview_vd.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        VideosAdapter adapter = new VideosAdapter(videos, R.layout.video_layout, getApplicationContext());
+                        Log.e("Size", " " + adapter.getItemCount());
+                        recyclerview_vd.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<VideosResponse> call, Throwable t) {
 
                 }
             });
