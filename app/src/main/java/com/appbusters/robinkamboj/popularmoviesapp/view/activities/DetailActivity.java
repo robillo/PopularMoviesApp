@@ -7,6 +7,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
+import com.appbusters.robinkamboj.popularmoviesapp.controller.ReviewsAdapter;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ViewTarget;
-import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
 import com.appbusters.robinkamboj.popularmoviesapp.model.Review;
 import com.appbusters.robinkamboj.popularmoviesapp.model.ReviewsResponse;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
@@ -24,10 +26,13 @@ import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -35,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
     private ApiInterface apiService;
     private List<Review> reviews;
     private RecyclerView reviews_rv;
+    private CardView reviews_card;
     private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview;
     private int id;
     private CollapsingToolbarLayout toolbar_layout;
@@ -51,6 +57,7 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        reviews_card = (CardView) findViewById(R.id.reviews_card);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         reviews_rv = (RecyclerView) findViewById(R.id.reviews);
         poster = (ImageView) findViewById(R.id.poster);
@@ -108,10 +115,35 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         reviews = Collections.emptyList();
-        callReviews(reviews);
+        callReviews();
     }
 
-    private void callReviews(List<Review> reviews){
-        Call<MoviesResponse> call = apiService.searchMovieReviews(id, API_KEY);
+    private void callReviews(){
+        Call<ReviewsResponse> call = apiService.searchMovieReviews(id, API_KEY);
+        if(call!=null){
+            call.enqueue(new Callback<ReviewsResponse>() {
+                @Override
+                public void onResponse(Call<ReviewsResponse> call, Response<ReviewsResponse> response) {
+                    reviews = new ArrayList<Review>();
+                    reviews = response.body().getResults();
+                    for(Review singleReview : reviews){
+                        Log.e("Review", singleReview.getContent());
+//                        reviews.add(singleReview);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ReviewsResponse> call, Throwable t) {
+
+                }
+            });
+            if(reviews.size()>0){
+                reviews_card.setVisibility(View.VISIBLE);
+                reviews_rv.setLayoutManager(new LinearLayoutManager(this));
+                ReviewsAdapter adapter = new ReviewsAdapter(reviews, R.layout.reviews_layout, getApplicationContext());
+                Log.e("Size", " " + adapter.getItemCount());
+                reviews_rv.setAdapter(adapter);
+            }
+        }
     }
 }

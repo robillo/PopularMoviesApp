@@ -2,6 +2,8 @@ package com.appbusters.robinkamboj.popularmoviesapp.rest;
 
 import com.appbusters.robinkamboj.popularmoviesapp.model.Movie;
 import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
+import com.appbusters.robinkamboj.popularmoviesapp.model.ReviewsResponse;
+import com.appbusters.robinkamboj.popularmoviesapp.model.VideosResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -45,11 +47,11 @@ public interface ApiInterface {
     //Search Movie Videos
 
     @GET("movie/{id}/videos")
-    Call<MoviesResponse> searchMovieVideos(@Path("id") int id, @Query("api_key") String apiKey);
+    Call<VideosResponse> searchMovieVideos(@Path("id") int id, @Query("api_key") String apiKey);
 
     //Search Movie Reviews
 
     @GET("movie/{id}/reviews")
-    Call<MoviesResponse> searchMovieReviews(@Path("id") int id, @Query("api_key") String apiKey);
+    Call<ReviewsResponse> searchMovieReviews(@Path("id") int id, @Query("api_key") String apiKey);
 
 }

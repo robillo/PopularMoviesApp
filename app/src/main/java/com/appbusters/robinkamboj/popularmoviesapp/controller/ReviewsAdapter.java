@@ -6,17 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.appbusters.robinkamboj.popularmoviesapp.model.Review;
+
+import java.util.Collections;
+import java.util.List;
+
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsHolder>{
 
-    private String title, description, reviewee, path;
+    private List<Review> reviews;
     private int row_layout;
     private Context context;
 
-    public ReviewsAdapter(String title, String description, String reviewee, String path, int row_layout, Context context) {
-        this.title = title;
-        this.description = description;
-        this.reviewee = reviewee;
-        this.path = path;
+    public ReviewsAdapter(List<Review> reviews, int row_layout, Context context) {
+        this.reviews = reviews;
         this.row_layout = row_layout;
         this.context = context;
     }
@@ -29,13 +31,12 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsHolder>{
 
     @Override
     public void onBindViewHolder(ReviewsHolder holder, int position) {
-        holder.review_title.setText(title);
-        holder.review_description.setText(description);
-        holder.review_reviewee.setText(reviewee);
+        holder.review_description.setText(reviews.get(position).getContent());
+        holder.review_reviewee.setText(reviews.get(position).getAuthor());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return reviews.size();
     }
 }
