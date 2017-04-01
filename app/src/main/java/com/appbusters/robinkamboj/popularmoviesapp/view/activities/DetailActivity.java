@@ -16,14 +16,27 @@ import android.widget.TextView;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ViewTarget;
+import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
+import com.appbusters.robinkamboj.popularmoviesapp.model.Review;
+import com.appbusters.robinkamboj.popularmoviesapp.model.ReviewsResponse;
+import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
+import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.Collections;
+import java.util.List;
+
+import retrofit2.Call;
 
 public class DetailActivity extends AppCompatActivity {
 
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
-    private RecyclerView reviews;
-    private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview, id;
+    private ApiInterface apiService;
+    private List<Review> reviews;
+    private RecyclerView reviews_rv;
+    private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview;
+    private int id;
     private CollapsingToolbarLayout toolbar_layout;
 
     private ImageView poster;
@@ -38,7 +51,8 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        reviews = (RecyclerView) findViewById(R.id.reviews);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        reviews_rv = (RecyclerView) findViewById(R.id.reviews);
         poster = (ImageView) findViewById(R.id.poster);
         movie_title = (TextView) findViewById(R.id.title);
         movie_rating = (TextView) findViewById(R.id.rating);
@@ -58,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
         popularity = i.getStringExtra("popularity");
         original_language = i.getStringExtra("original_language");
         overview = i.getStringExtra("overview");
-        id = i.getStringExtra("id");
+        id = i.getIntExtra("id", 550);
 
         getSupportActionBar().setTitle(title);
 
@@ -92,5 +106,12 @@ public class DetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        reviews = Collections.emptyList();
+        callReviews(reviews);
+    }
+
+    private void callReviews(List<Review> reviews){
+        Call<MoviesResponse> call = apiService.searchMovieReviews(id, API_KEY);
     }
 }

@@ -32,7 +32,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
         itemView.setOnLongClickListener(this);
     }
 
-    public void DetailIntent(String title, String poster_path, String is_adult, String backdrop_path, String original_language, String popularity, String release_date, String vote_count, String vote_average, String is_video, String overview, String id){
+    public void DetailIntent(String title, String poster_path, String is_adult, String backdrop_path, String original_language, String popularity, String release_date, String vote_count, String vote_average, String is_video, String overview, int id){
         Intent i = new Intent(context, DetailActivity.class);
         i.putExtra("title", title);
         i.putExtra("poster_path", poster_path);
