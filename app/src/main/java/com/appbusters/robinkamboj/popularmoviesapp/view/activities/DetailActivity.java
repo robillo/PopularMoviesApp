@@ -130,6 +130,13 @@ public class DetailActivity extends AppCompatActivity {
                         Log.e("Review", singleReview.getContent());
 //                        reviews.add(singleReview);
                     }
+                    if(reviews.size()>0){
+                        reviews_card.setVisibility(View.VISIBLE);
+                        reviews_rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        ReviewsAdapter adapter = new ReviewsAdapter(reviews, R.layout.reviews_layout, getApplicationContext());
+                        Log.e("Size", " " + adapter.getItemCount());
+                        reviews_rv.setAdapter(adapter);
+                    }
                 }
 
                 @Override
@@ -137,13 +144,6 @@ public class DetailActivity extends AppCompatActivity {
 
                 }
             });
-            if(reviews.size()>0){
-                reviews_card.setVisibility(View.VISIBLE);
-                reviews_rv.setLayoutManager(new LinearLayoutManager(this));
-                ReviewsAdapter adapter = new ReviewsAdapter(reviews, R.layout.reviews_layout, getApplicationContext());
-                Log.e("Size", " " + adapter.getItemCount());
-                reviews_rv.setAdapter(adapter);
-            }
         }
     }
 }

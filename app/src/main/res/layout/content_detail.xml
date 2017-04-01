@@ -120,7 +120,7 @@
             android:layout_margin="5sp"
             app:cardCornerRadius="5sp"
             android:id="@+id/videos_card"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -180,7 +180,7 @@
             android:layout_margin="5sp"
             app:cardCornerRadius="5sp"
             android:id="@+id/reviews_card"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -198,7 +198,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/reviews">
+                    android:id="@+id/reviews"
+                    android:layout_below="@id/three">
 
                 </android.support.v7.widget.RecyclerView>
 
