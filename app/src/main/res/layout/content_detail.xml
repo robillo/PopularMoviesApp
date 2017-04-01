@@ -135,39 +135,13 @@
                     android:id="@+id/two"
                     android:fontFamily="sans-serif-smallcaps"/>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/recyclerview_vd"
                     android:layout_below="@+id/two">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <SurfaceView
-                            android:layout_width="200sp"
-                            android:layout_height="100sp"
-                            android:layout_margin="4sp"/>
-
-                        <SurfaceView
-                            android:layout_width="200sp"
-                            android:layout_height="100sp"
-                            android:layout_margin="4sp"/>
-
-                        <SurfaceView
-                            android:layout_width="200sp"
-                            android:layout_height="100sp"
-                            android:layout_margin="4sp"/>
-
-                        <SurfaceView
-                            android:layout_width="200sp"
-                            android:layout_height="100sp"
-                            android:layout_margin="4sp"/>
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                </android.support.v7.widget.RecyclerView>
 
             </RelativeLayout>
 

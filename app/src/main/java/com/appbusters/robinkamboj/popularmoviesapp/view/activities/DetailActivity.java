@@ -2,7 +2,6 @@ package com.appbusters.robinkamboj.popularmoviesapp.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
     private ApiInterface apiService;
     private List<Review> reviews;
-    private RecyclerView reviews_rv;
+    private RecyclerView reviews_rv, recyclerview_vd;
     private CardView reviews_card;
     private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview;
     private int id;
@@ -59,6 +58,7 @@ public class DetailActivity extends AppCompatActivity {
 
         reviews_card = (CardView) findViewById(R.id.reviews_card);
         apiService = ApiClient.getClient().create(ApiInterface.class);
+        recyclerview_vd = (RecyclerView) findViewById(R.id.recyclerview_vd);
         reviews_rv = (RecyclerView) findViewById(R.id.reviews);
         poster = (ImageView) findViewById(R.id.poster);
         movie_title = (TextView) findViewById(R.id.title);
