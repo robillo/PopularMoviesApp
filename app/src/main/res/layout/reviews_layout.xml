@@ -8,9 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlackShade"
-        android:textSize="16sp"
-        android:padding="5sp"
-        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="12sp"
+        android:padding="3sp"
+        android:fontFamily="casual"
         android:text="The Review Content Goes Here."
         android:id="@+id/description"/>
 
@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlackShade"
         android:textSize="16sp"
-        android:padding="5sp"
-        android:fontFamily="sans-serif-smallcaps"
+        android:padding="3sp"
+        android:fontFamily="casual"
         android:layout_alignParentEnd="true"
         android:text="-XYZ Guy"
         android:id="@+id/reviewee"

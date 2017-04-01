@@ -32,7 +32,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsHolder>{
     @Override
     public void onBindViewHolder(ReviewsHolder holder, int position) {
         holder.review_description.setText(reviews.get(position).getContent());
-        holder.review_reviewee.setText(reviews.get(position).getAuthor());
+        holder.review_reviewee.setText("-" + reviews.get(position).getAuthor());
     }
 
     @Override
