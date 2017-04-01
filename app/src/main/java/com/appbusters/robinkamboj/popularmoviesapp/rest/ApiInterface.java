@@ -42,12 +42,14 @@ public interface ApiInterface {
     @GET("search/movie?query=")
     Call<MoviesResponse> searchMovieDetails(String name, @Query("api_key") String apiKey);
 
-//    //Search Movie Videos
-//
-//    @GET("movie/{id}/videos")
-//    Call<MoviesResponse> searchMovieVideos(@Path("id") int id, @Query("api_key") String apiKey);
-//
-//    @GET("movie/{id}/reviews")
-//    Call<MoviesResponse> searchMovieReviews(@Path("id") int id, @Query("api_key") String apiKey);
+    //Search Movie Videos
+
+    @GET("movie/{id}/videos")
+    Call<MoviesResponse> searchMovieVideos(@Path("id") int id, @Query("api_key") String apiKey);
+
+    //Search Movie Reviews
+
+    @GET("movie/{id}/reviews")
+    Call<MoviesResponse> searchMovieReviews(@Path("id") int id, @Query("api_key") String apiKey);
 
 }
