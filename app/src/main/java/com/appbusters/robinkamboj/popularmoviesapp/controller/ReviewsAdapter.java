@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.appbusters.robinkamboj.popularmoviesapp.model.Review;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsHolder>{

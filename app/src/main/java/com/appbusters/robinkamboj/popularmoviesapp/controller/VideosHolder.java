@@ -9,8 +9,8 @@ import com.appbusters.robinkamboj.popularmoviesapp.R;
 
 public class VideosHolder extends RecyclerView.ViewHolder{
 
-    private ImageView backDrop;
-    private RelativeLayout clickView;
+    public ImageView backDrop;
+    public RelativeLayout clickView;
 
     public VideosHolder(View itemView) {
         super(itemView);
