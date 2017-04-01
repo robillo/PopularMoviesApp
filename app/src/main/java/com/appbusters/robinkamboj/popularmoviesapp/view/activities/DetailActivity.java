@@ -161,13 +161,13 @@ public class DetailActivity extends AppCompatActivity {
                 public void onResponse(Call<VideosResponse> call, Response<VideosResponse> response) {
                     videos = new ArrayList<Video>();
                     videos = response.body().getResults();
-                    for(Review singleReview : reviews){
-                        Log.e("Review", singleReview.getContent());
+                    for(Video singleVideo : videos){
+                        Log.e("Video", singleVideo.getKey());
 //                        reviews.add(singleReview);
                     }
-                    if(reviews.size()>0){
+                    if(videos.size()>0){
                         videos_card.setVisibility(View.VISIBLE);
-                        recyclerview_vd.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerview_vd.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                         VideosAdapter adapter = new VideosAdapter(videos, R.layout.video_layout, getApplicationContext());
                         Log.e("Size", " " + adapter.getItemCount());
                         recyclerview_vd.setAdapter(adapter);
