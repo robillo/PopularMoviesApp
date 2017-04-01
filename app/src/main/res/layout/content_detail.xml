@@ -191,16 +191,12 @@
                     android:id="@+id/three"
                     android:fontFamily="sans-serif-smallcaps"/>
 
-                <TextView
+                <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5sp"
-                    android:text="Reviews Go Here"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorBlackShade"
-                    android:layout_below="@+id/three"
-                    android:fontFamily="casual"
-                    android:id="@+id/reviews"/>
+                    android:id="@+id/reviews">
+
+                </android.support.v7.widget.RecyclerView>
 
             </RelativeLayout>
 
