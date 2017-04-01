@@ -36,12 +36,13 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosHolder>{
         path = "https://img.youtube.com/vi/" + videos.get(position).getKey() + "/mqdefault.jpg";
         Glide.with(context).load(path)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
                 .crossFade()
                 .into(holder.backDrop);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return videos.size();
     }
 }
