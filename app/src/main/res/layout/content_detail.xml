@@ -118,7 +118,9 @@
             android:layout_height="wrap_content"
             app:cardElevation="4sp"
             android:layout_margin="5sp"
-            app:cardCornerRadius="5sp">
+            app:cardCornerRadius="5sp"
+            android:id="@+id/videos_card"
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -176,7 +178,9 @@
             android:layout_height="wrap_content"
             app:cardElevation="4sp"
             android:layout_margin="5sp"
-            app:cardCornerRadius="5sp">
+            app:cardCornerRadius="5sp"
+            android:id="@+id/reviews_card"
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="match_parent"

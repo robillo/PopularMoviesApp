@@ -7,6 +7,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private static final String API_KEY = "13befb0c6409e8c61c5e9ec4265a1d1c";
+    private RecyclerView reviews;
     private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview, id;
     private CollapsingToolbarLayout toolbar_layout;
 
@@ -35,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        reviews = (RecyclerView) findViewById(R.id.reviews);
         poster = (ImageView) findViewById(R.id.poster);
         movie_title = (TextView) findViewById(R.id.title);
         movie_rating = (TextView) findViewById(R.id.rating);
