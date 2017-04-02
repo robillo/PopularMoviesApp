@@ -120,7 +120,7 @@
             android:layout_margin="5sp"
             app:cardCornerRadius="5sp"
             android:id="@+id/videos_card"
-            android:visibility="gone">
+            android:visibility="invisible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
