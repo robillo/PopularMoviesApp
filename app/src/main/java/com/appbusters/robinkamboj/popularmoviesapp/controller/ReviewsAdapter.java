@@ -31,7 +31,19 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsHolder>{
     @Override
     public void onBindViewHolder(ReviewsHolder holder, int position) {
         holder.review_description.setText(reviews.get(position).getContent());
-        holder.review_reviewee.setText("-" + reviews.get(position).getAuthor());
+        String temp = "-" + reviews.get(position).getAuthor();
+        holder.review_reviewee.setText(temp);
+        holder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View v, int position, boolean isLongClick) {
+                if(isLongClick){
+
+                }
+                else {
+
+                }
+            }
+        });
     }
 
     @Override

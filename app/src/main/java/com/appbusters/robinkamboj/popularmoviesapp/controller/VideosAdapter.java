@@ -39,6 +39,17 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosHolder>{
                 .centerCrop()
                 .crossFade()
                 .into(holder.backDrop);
+        holder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View v, int position, boolean isLongClick) {
+                if(isLongClick){
+
+                }
+                else {
+
+                }
+            }
+        });
     }
 
     @Override
