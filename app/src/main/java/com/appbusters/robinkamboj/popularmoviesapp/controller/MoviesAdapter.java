@@ -37,7 +37,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder>{
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
         String path = movies.get(position).getPoster_path();
         holder.movieTitle.setText(movies.get(position).getTitle());
-        Glide.with(context).load("http://image.tmdb.org/t/p/w185" + path)
+        Glide.with(context).load("http://image.tmdb.org/t/p/w780" + path)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
                 .centerCrop()

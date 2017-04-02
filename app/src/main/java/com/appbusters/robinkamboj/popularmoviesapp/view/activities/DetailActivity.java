@@ -104,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
 
         ViewTarget view_target = new ViewTarget(toolbar_layout);
 
-        Glide.with(this).load("http://image.tmdb.org/t/p/w185" + backdrop_path)
+        Glide.with(this).load("http://image.tmdb.org/t/p/w780" + backdrop_path)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
