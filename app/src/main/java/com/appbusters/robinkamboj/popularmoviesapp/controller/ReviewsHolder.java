@@ -1,6 +1,8 @@
 package com.appbusters.robinkamboj.popularmoviesapp.controller;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -36,5 +38,10 @@ public class ReviewsHolder extends RecyclerView.ViewHolder implements View.OnCli
     public boolean onLongClick(View view) {
         clickListener.onClick(view, getAdapterPosition(), true);
         return false;
+    }
+
+    public void review_intent(String review_id){
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/review/" + review_id));
+        context.startActivity(i);
     }
 }
