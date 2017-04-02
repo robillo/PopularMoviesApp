@@ -32,7 +32,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosHolder>{
     }
 
     @Override
-    public void onBindViewHolder(VideosHolder holder, int position) {
+    public void onBindViewHolder(final VideosHolder holder, int position) {
         path = "https://img.youtube.com/vi/" + videos.get(position).getKey() + "/mqdefault.jpg";
         Glide.with(context).load(path)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -43,10 +43,10 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosHolder>{
             @Override
             public void onClick(View v, int position, boolean isLongClick) {
                 if(isLongClick){
-
+                    holder.video_intent(videos.get(position).getKey());
                 }
                 else {
-
+                    holder.video_intent(videos.get(position).getKey());
                 }
             }
         });

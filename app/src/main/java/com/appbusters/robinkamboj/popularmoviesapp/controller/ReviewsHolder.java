@@ -1,5 +1,6 @@
 package com.appbusters.robinkamboj.popularmoviesapp.controller;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -9,12 +10,14 @@ import com.appbusters.robinkamboj.popularmoviesapp.R;
 public class ReviewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
     public TextView review_description, review_reviewee;
+    private Context context;
     private ItemClickListener clickListener;
 
     public ReviewsHolder(View itemView) {
         super(itemView);
         review_description = (TextView) itemView.findViewById(R.id.description);
         review_reviewee = (TextView) itemView.findViewById(R.id.reviewee);
+        context = itemView.getContext();
 
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
