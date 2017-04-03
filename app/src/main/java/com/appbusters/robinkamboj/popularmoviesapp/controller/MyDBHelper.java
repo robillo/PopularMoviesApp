@@ -43,7 +43,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     //CRUD OPERATIONS
 
     //create:
-    private Boolean insertMovie(Movie movie){
+    public Boolean insertMovie(Movie movie){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ID + " ", movie.getId());
@@ -55,5 +55,20 @@ public class MyDBHelper extends SQLiteOpenHelper {
         contentValues.put(OVERVIEW + " ", movie.getOverview());
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         return true;
+    }
+
+    //read:
+    public Cursor getMovie(int id){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + "WHERE " + ID + "=" + id, null);
+        return cursor;
+    }
+
+    //update: updateMovie() not required.
+
+    //delete:
+    public Integer deleteMovie(int id){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete(TABLE_NAME, ID + " =? ", new String[]{Integer.toString(id)});
     }
 }
