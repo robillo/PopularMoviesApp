@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
         movie_release_date.setText(release_date);
         movie_overview.setText(overview);
 
-        Glide.with(this).load("http://image.tmdb.org/t/p/w185" + poster_path)
+        Glide.with(this).load("http://image.tmdb.org/t/p/w780" + poster_path)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
