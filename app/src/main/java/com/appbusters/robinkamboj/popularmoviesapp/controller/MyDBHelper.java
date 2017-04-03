@@ -22,7 +22,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private static final String POSTER = "POSTER";
     private static final String BACKDROP = "BACKDROP";
     private static final String RATING = "RATING";
-    private static final String RELEASE_DATE = "DATE";
+    private static final String RELEASE_DATE = "RELEASE";
     private static final String OVERVIEW = "OVERVIEW";
 
     public MyDBHelper(Context context) {
@@ -38,5 +38,22 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    //CRUD OPERATIONS
+
+    //create:
+    private Boolean insertMovie(int id, String name, String poster, String backdrop, String rating, String release, String overview){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID + " ", id);
+        contentValues.put(NAME + " ", name);
+        contentValues.put(POSTER + " ", poster);
+        contentValues.put(BACKDROP + " ", backdrop);
+        contentValues.put(RATING + " ", rating);
+        contentValues.put(RELEASE_DATE + " ", release);
+        contentValues.put(OVERVIEW + " ", overview);
+        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        return true;
     }
 }
