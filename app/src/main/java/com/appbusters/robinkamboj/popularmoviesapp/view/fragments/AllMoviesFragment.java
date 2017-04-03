@@ -197,10 +197,7 @@ public class AllMoviesFragment extends Fragment{
             }
         };
 
-        loadNextDataFromApi(page_number, movies);
-
         callMovies(page_number, movies);
-//        nextPageResults();
         refresh();
 
         return v;
