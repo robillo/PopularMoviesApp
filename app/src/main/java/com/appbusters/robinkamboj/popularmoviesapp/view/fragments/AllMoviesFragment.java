@@ -205,7 +205,7 @@ public class AllMoviesFragment extends Fragment{
         scrollListener = new EndlessScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                loadNextDataFromApi(page_number+2);
+                loadNextDataFromApi(page_number);
             }
         };
 
@@ -332,6 +332,7 @@ public class AllMoviesFragment extends Fragment{
 //                        recyclerView.setVisibility(View.VISIBLE);
 //                        recyclerView.setAdapter(adapter);
                     recyclerView.getAdapter().notifyDataSetChanged();
+                    page_number++;
 //                        alternate_layout.setVisibility(View.INVISIBLE);
                     }
 //                }
@@ -371,6 +372,7 @@ public class AllMoviesFragment extends Fragment{
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter(adapter);
                         alternate_layout.setVisibility(View.INVISIBLE);
+                        page_number++;
                     }
                 }
 
@@ -386,42 +388,44 @@ public class AllMoviesFragment extends Fragment{
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.e("ON REFRESH CALLED", "onRefresh called from SwipeRefreshLayout");
-                apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<MoviesResponse> call = null;
-                switch (which_filter){
-                    case 0:{
-                        call = apiService.getTopRatedMovies(API_KEY, page_number);
-                        break;
-                    }
-                    case 1:{
-                        call = apiService.getMostPopularMovies(API_KEY, page_number);
-                        break;
-                    }
-                    case 2:{
-                        call = apiService.getMostRatedMovies(API_KEY, page_number);
-                        break;
-                    }
-                }
-                if (call != null) {
-                    call.enqueue(new Callback<MoviesResponse>() {
-                        @Override
-                        public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                            movies = response.body().getResults();
-                            adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
-                            if(adapter.getItemCount()>0){
-                                recyclerView.setVisibility(View.VISIBLE);
-                                recyclerView.setAdapter(adapter);
-                                alternate_layout.setVisibility(View.INVISIBLE);
-                            }
-                        }
+//                Log.e("ON REFRESH CALLED", "onRefresh called from SwipeRefreshLayout");
+//                apiService = ApiClient.getClient().create(ApiInterface.class);
+//                Call<MoviesResponse> call = null;
+//                switch (which_filter){
+//                    case 0:{
+//                        call = apiService.getTopRatedMovies(API_KEY, page_number);
+//                        break;
+//                    }
+//                    case 1:{
+//                        call = apiService.getMostPopularMovies(API_KEY, page_number);
+//                        break;
+//                    }
+//                    case 2:{
+//                        call = apiService.getMostRatedMovies(API_KEY, page_number);
+//                        break;
+//                    }
+//                }
+//                if (call != null) {
+//                    call.enqueue(new Callback<MoviesResponse>() {
+//                        @Override
+//                        public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+//                            movies = response.body().getResults();
+//                            adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity().getApplicationContext());
+//                            if(adapter.getItemCount()>0){
+//                                recyclerView.setVisibility(View.VISIBLE);
+//                                recyclerView.setAdapter(adapter);
+//                                alternate_layout.setVisibility(View.INVISIBLE);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<MoviesResponse> call, Throwable t) {
+//
+//                        }
+//                    });
+//                }
 
-                        @Override
-                        public void onFailure(Call<MoviesResponse> call, Throwable t) {
-
-                        }
-                    });
-                }
+                page_number=1;
 
                 Handler handler = new Handler();
                 Handler handler1 = new Handler();
