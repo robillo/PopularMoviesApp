@@ -19,7 +19,7 @@ import java.util.ListIterator;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Movies.db";
+    private static final String DATABASE_NAME = "Favorites.db";
     private static final String TABLE_NAME = "FAVORITE_MOVIES";
     private static final String ID = "ID";
     private static final String NAME = "NAME";
@@ -47,16 +47,16 @@ public class MyDBHelper extends SQLiteOpenHelper {
     //CRUD OPERATIONS
 
     //create:
-    public Boolean insertMovie(Movie movie){
+    public Boolean insertMovie(String title, String poster_path, String backdrop_path, String vote_average, String release_date, String overview, int id){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ID + " ", movie.getId());
-        contentValues.put(NAME + " ", movie.getTitle());
-        contentValues.put(POSTER + " ","http://image.tmdb.org/t/p/w780"+movie.getPoster_path());
-        contentValues.put(BACKDROP + " ","http://image.tmdb.org/t/p/w780"+movie.getBackdrop_path());
-        contentValues.put(RATING + " ", movie.getVote_average());
-        contentValues.put(RELEASE_DATE + " ", movie.getRelease_date());
-        contentValues.put(OVERVIEW + " ", movie.getOverview());
+        contentValues.put(ID + " ", id);
+        contentValues.put(NAME + " ", title);
+        contentValues.put(POSTER + " ","http://image.tmdb.org/t/p/w780"+ poster_path);
+        contentValues.put(BACKDROP + " ","http://image.tmdb.org/t/p/w780"+ backdrop_path);
+        contentValues.put(RATING + " ", vote_average);
+        contentValues.put(RELEASE_DATE + " ", release_date);
+        contentValues.put(OVERVIEW + " ", overview);
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         return true;
     }
@@ -83,7 +83,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         Cursor res =  sqLiteDatabase.rawQuery( "SELECT * FROM " + TABLE_NAME + " ", null );
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while(!res.isAfterLast()){
             List<Integer> i = new List<Integer>() {
                 @Override
                 public int size() {

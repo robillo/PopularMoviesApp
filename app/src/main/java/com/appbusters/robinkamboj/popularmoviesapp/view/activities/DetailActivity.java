@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
+import com.appbusters.robinkamboj.popularmoviesapp.controller.MyDBHelper;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ReviewsAdapter;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.VideosAdapter;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.ViewTarget;
@@ -47,9 +48,10 @@ public class DetailActivity extends AppCompatActivity {
     private String title, poster_path, backdrop_path, vote_average, is_video, is_adult, vote_count, release_date, popularity, original_language, overview;
     private int id;
     private CollapsingToolbarLayout toolbar_layout;
-
     private ImageView poster;
     private TextView movie_title, movie_rating, movie_release_date, movie_overview;
+    private MyDBHelper myDBHelper;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,9 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        myDBHelper = new MyDBHelper(this);
 
         videos_card = (CardView) findViewById(R.id.videos_card);
         reviews_card = (CardView) findViewById(R.id.reviews_card);
@@ -86,6 +91,8 @@ public class DetailActivity extends AppCompatActivity {
         overview = i.getStringExtra("overview");
         id = i.getIntExtra("id", 550);
 
+        fabOnClick();
+
         getSupportActionBar().setTitle(title);
 
         movie_title.setText(title);
@@ -110,18 +117,18 @@ public class DetailActivity extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(view_target);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         reviews = Collections.emptyList();
         callReviews();
         callVideos();
+    }
+
+    private void fabOnClick(){
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDBHelper.insertMovie(title, poster_path, backdrop_path, vote_average, release_date, overview, id);
+            }
+        });
     }
 
     private void callReviews(){
