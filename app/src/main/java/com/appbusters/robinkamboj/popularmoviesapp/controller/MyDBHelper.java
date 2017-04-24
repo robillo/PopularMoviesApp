@@ -51,8 +51,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NAME + " ", title);
-        contentValues.put(POSTER + " ","http://image.tmdb.org/t/p/w780"+poster_path);
-        contentValues.put(BACKDROP + " ","http://image.tmdb.org/t/p/w780"+backdrop_path);
+        contentValues.put(POSTER + " ", poster_path);
+        contentValues.put(BACKDROP + " ", backdrop_path);
         contentValues.put(RATING + " ", vote_average);
         contentValues.put(RELEASE_DATE + " ", release_date);
         contentValues.put(OVERVIEW + " ", overview);
@@ -205,7 +205,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
                     return null;
                 }
             };
-            data.add(new Movie(res.getString(res.getColumnIndex(POSTER)), false, res.getString(res.getColumnIndex(OVERVIEW)), res.getString(res.getColumnIndex(RELEASE_DATE)), res.getInt(res.getColumnIndex(ID)), res.getString(res.getColumnIndex(NAME)), "null", res.getString(res.getColumnIndex(NAME)), res.getString(res.getColumnIndex(BACKDROP)), 0, 0, false, 0, i));
+            data.add(new Movie(res.getString(res.getColumnIndex(POSTER)), false, res.getString(res.getColumnIndex(OVERVIEW)), res.getString(res.getColumnIndex(RELEASE_DATE)), res.getInt(res.getColumnIndex(ID)), res.getString(res.getColumnIndex(NAME)), "null", res.getString(res.getColumnIndex(NAME)), res.getString(res.getColumnIndex(BACKDROP)), 0, 0, false, res.getColumnIndex(RATING), i));
             res.moveToNext();
         }
 
