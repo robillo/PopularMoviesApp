@@ -50,13 +50,13 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public Boolean insertMovie(String title, String poster_path, String backdrop_path, String vote_average, String release_date, String overview, int id){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ID + " ", id);
         contentValues.put(NAME + " ", title);
-        contentValues.put(POSTER + " ","http://image.tmdb.org/t/p/w780"+ poster_path);
-        contentValues.put(BACKDROP + " ","http://image.tmdb.org/t/p/w780"+ backdrop_path);
+        contentValues.put(POSTER + " ","http://image.tmdb.org/t/p/w780"+poster_path);
+        contentValues.put(BACKDROP + " ","http://image.tmdb.org/t/p/w780"+backdrop_path);
         contentValues.put(RATING + " ", vote_average);
         contentValues.put(RELEASE_DATE + " ", release_date);
         contentValues.put(OVERVIEW + " ", overview);
+        contentValues.put(ID + " ", id);
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         return true;
     }

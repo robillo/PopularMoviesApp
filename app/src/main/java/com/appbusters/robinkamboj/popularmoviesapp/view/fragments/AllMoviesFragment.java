@@ -235,7 +235,7 @@ public class AllMoviesFragment extends Fragment{
                 break;
             }
             case R.id.action_sort:{
-                Log.e("CHECK CLICK", "CLICKED! YO!");
+//                Log.e("CHECK CLICK", "CLICKED! YO!");
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Choose Sorting Option:")
                         .setItems(items, new DialogInterface.OnClickListener() {
@@ -287,7 +287,7 @@ public class AllMoviesFragment extends Fragment{
         if(savedInstanceState!=null){
             which_filter = savedInstanceState.getInt("WHICH_FILTER");
             page_number = savedInstanceState.getInt("WHICH_PAGE");
-            Log.e("THE FILTER IS", " " + which_filter);
+//            Log.e("THE FILTER IS", " " + which_filter);
         }
         else {
             refresh();
@@ -297,7 +297,7 @@ public class AllMoviesFragment extends Fragment{
 
     private void loadNextDataFromApi(int page) {
 
-        Log.e("LNDFA", "LOADING");
+//        Log.e("LNDFA", "LOADING");
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> call = null;
@@ -315,18 +315,18 @@ public class AllMoviesFragment extends Fragment{
                 break;
             }
         }
-        Log.e("CALL", "TRUE");
+//        Log.e("CALL", "TRUE");
 //        if (call != null) {
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                     for (Movie singleMovie : response.body().getResults()) {
                         movies.add(singleMovie);
-                        Log.e("Single Movie", singleMovie.getTitle());
+//                        Log.e("Single Movie", singleMovie.getTitle());
                     }
 //                    movies = response.body().getResults();
                     adapter = new MoviesAdapter(movies, R.layout.row_layout, getActivity());
-                    Log.e("Adapter", " " + adapter.getItemCount());
+//                    Log.e("Adapter", " " + adapter.getItemCount());
 //                    adapter.notifyItemRangeInserted(21, 40);
 //                    if(adapter.getItemCount()>0){
 //                        recyclerView.setVisibility(View.VISIBLE);

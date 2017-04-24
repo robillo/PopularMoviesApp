@@ -100,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         movie_release_date.setText(release_date);
         movie_overview.setText(overview);
 
-        Log.e("POSTER PATH", poster_path);
+//        Log.e("POSTER PATH", poster_path);
         Glide.with(this).load("http://image.tmdb.org/t/p/w780" + poster_path)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
@@ -112,7 +112,7 @@ public class DetailActivity extends AppCompatActivity {
 
         ViewTarget view_target = new ViewTarget(toolbar_layout);
 
-        Log.e("BACKDROP PATH", backdrop_path);
+//        Log.e("BACKDROP PATH", backdrop_path);
         Glide.with(this).load("http://image.tmdb.org/t/p/w780" + backdrop_path)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
@@ -142,14 +142,14 @@ public class DetailActivity extends AppCompatActivity {
                     reviews = new ArrayList<Review>();
                     reviews = response.body().getResults();
                     for(Review singleReview : reviews){
-                        Log.e("Review", singleReview.getContent());
+//                        Log.e("Review", singleReview.getContent());
 //                        reviews.add(singleReview);
                     }
                     if(reviews.size()>0){
                         reviews_card.setVisibility(View.VISIBLE);
                         reviews_rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         ReviewsAdapter adapter = new ReviewsAdapter(reviews, R.layout.reviews_layout, getApplicationContext());
-                        Log.e("Size", " " + adapter.getItemCount());
+//                        Log.e("Size", " " + adapter.getItemCount());
                         reviews_rv.setAdapter(adapter);
                     }
                 }
@@ -171,14 +171,14 @@ public class DetailActivity extends AppCompatActivity {
                     videos = new ArrayList<Video>();
                     videos = response.body().getResults();
                     for(Video singleVideo : videos){
-                        Log.e("Video", singleVideo.getKey());
+//                        Log.e("Video", singleVideo.getKey());
 //                        reviews.add(singleReview);
                     }
                     if(videos.size()>0){
                         videos_card.setVisibility(View.VISIBLE);
                         recyclerview_vd.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                         VideosAdapter adapter = new VideosAdapter(videos, R.layout.video_layout, getApplicationContext());
-                        Log.e("Size", " " + adapter.getItemCount());
+//                        Log.e("Size", " " + adapter.getItemCount());
                         recyclerview_vd.setAdapter(adapter);
                     }
                 }
