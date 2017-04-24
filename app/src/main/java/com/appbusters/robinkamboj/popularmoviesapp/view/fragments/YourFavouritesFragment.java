@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.appbusters.robinkamboj.popularmoviesapp.R;
 import com.appbusters.robinkamboj.popularmoviesapp.controller.MoviesAdapter;
@@ -33,6 +34,7 @@ public class YourFavouritesFragment extends Fragment {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
     private MoviesAdapter adapter;
+    private LinearLayout alternateLayout;
 
     public YourFavouritesFragment() {
         // Required empty public constructor
@@ -45,6 +47,7 @@ public class YourFavouritesFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_your_favourites, container, false);
 
+        alternateLayout = (LinearLayout) v.findViewById(R.id.alternate_layout);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
         if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
@@ -64,6 +67,7 @@ public class YourFavouritesFragment extends Fragment {
             adapter = new MoviesAdapter(data, R.layout.row_layout, getActivity());
             recyclerView.setAdapter(adapter);
             recyclerView.setVisibility(View.VISIBLE);
+            alternateLayout.setVisibility(View.INVISIBLE);
         }
 
         setHasOptionsMenu(true);

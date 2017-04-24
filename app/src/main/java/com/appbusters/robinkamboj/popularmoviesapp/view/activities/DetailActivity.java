@@ -100,6 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         movie_release_date.setText(release_date);
         movie_overview.setText(overview);
 
+        Log.e("POSTER PATH", poster_path);
         Glide.with(this).load("http://image.tmdb.org/t/p/w780" + poster_path)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
@@ -111,6 +112,7 @@ public class DetailActivity extends AppCompatActivity {
 
         ViewTarget view_target = new ViewTarget(toolbar_layout);
 
+        Log.e("BACKDROP PATH", backdrop_path);
         Glide.with(this).load("http://image.tmdb.org/t/p/w780" + backdrop_path)
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
