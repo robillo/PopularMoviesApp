@@ -23,4 +23,8 @@
         android:id="@+id/menu_refresh"
         app:showAsAction="never"
         android:title="Refresh"/>
+    <item
+        android:id="@+id/move_to_first"
+        app:showAsAction="never"
+        android:title="Move To First"/>
 </menu>

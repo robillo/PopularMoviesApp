@@ -270,6 +270,9 @@ public class AllMoviesFragment extends Fragment{
 
                 break;
             }
+            case R.id.move_to_first:{
+                recyclerView.getLayoutManager().scrollToPosition(1);
+            }
         }
 
         return super.onOptionsItemSelected(item);
