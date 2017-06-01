@@ -10,6 +10,12 @@ The app has the following features:
  * The detail screen of each movie consists additionally of *comments and trailers*.
  * One can also *search for movies* using this app.
 
+##### Here are some screenshots:
+
+![Alt text](https://3.bp.blogspot.com/-W6JuscuwFXQ/WTCY-531WJI/AAAAAAAAATo/qBDFDdoj4m0mrOGI4Cv6SMpP73ki_q5wQCK4B/s320/Screenshot_2017-06-02-04-02-55-820.jpeg "Image: 1")
+![Alt text](https://2.bp.blogspot.com/-mzBW-BoL39c/WTCY1tUZAkI/AAAAAAAAATg/6byYeTAfNY8_OEcUpIrfM_-PIhfj25mEQCK4B/s320/Screenshot_2017-06-02-04-03-54-631.jpeg "Image: 2")
+![Alt text](https://3.bp.blogspot.com/-PpHZ2RttTck/WTCZC3XttwI/AAAAAAAAAT4/1EvUwbOXzK4c-Vro4qPMRrQcOk-3tCoUQCK4B/s320/Screenshot_2017-06-02-04-01-54-622.jpeg "Image: 3")
+![Alt text](https://2.bp.blogspot.com/-aOpd8pieXVM/WTCZBKaDAVI/AAAAAAAAATw/P1eLaVhUnksZGGy9ovkOUtiiFfMAMtqeQCK4B/s320/Screenshot_2017-06-02-04-02-25-115.jpeg "Image: 4")
 
 ## Getting Started:
 
