@@ -28,6 +28,7 @@ import com.appbusters.robinkamboj.popularmoviesapp.model.MoviesResponse;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiClient;
 import com.appbusters.robinkamboj.popularmoviesapp.rest.ApiInterface;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -50,7 +51,6 @@ public class AllMoviesFragment extends Fragment{
     private static int which_filter = 0;
     private int page_number = 1;
     private List<Movie> movies;
-    private EndlessScrollListener scrollListener;
 
     public AllMoviesFragment() {
         // Required empty public constructor
@@ -75,134 +75,14 @@ public class AllMoviesFragment extends Fragment{
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3);
         }
 
-        movies = new List<Movie>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<Movie> iterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @NonNull
-            @Override
-            public <T> T[] toArray(@NonNull T[] ts) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Movie movie) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(@NonNull Collection<? extends Movie> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int i, @NonNull Collection<? extends Movie> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Movie get(int i) {
-                return null;
-            }
-
-            @Override
-            public Movie set(int i, Movie movie) {
-                return null;
-            }
-
-            @Override
-            public void add(int i, Movie movie) {
-
-            }
-
-            @Override
-            public Movie remove(int i) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public ListIterator<Movie> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Movie> listIterator(int i) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public List<Movie> subList(int i, int i1) {
-                return null;
-            }
-        };
+        movies = new ArrayList<>();
 
         recyclerView.setLayoutManager(gridLayoutManager);
 
         callMovies(page_number);
         refresh();
 
-        scrollListener = new EndlessScrollListener(gridLayoutManager) {
+        EndlessScrollListener scrollListener = new EndlessScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 loadNextDataFromApi(page_number);
@@ -320,6 +200,7 @@ public class AllMoviesFragment extends Fragment{
         }
 //        Log.e("CALL", "TRUE");
 //        if (call != null) {
+        if (call != null) {
             call.enqueue(new Callback<MoviesResponse>() {
                 @Override
                 public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
@@ -346,6 +227,7 @@ public class AllMoviesFragment extends Fragment{
                 }
             });
         }
+    }
 //    }
 
     private void callMovies(int page){
